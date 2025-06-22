@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Client\Request;
+namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use Maartenpaauw\Mcp\LoggingLevel;
-use Maartenpaauw\Mcp\Message\BaseRequest;
-use Maartenpaauw\Mcp\Message\Method;
+use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\Message\Request\Method;
 use Override;
 
-final readonly class SetLevelRequest extends BaseRequest
+final readonly class SetLevelRequest extends BaseRequest implements Request
 {
     public function __construct(
         private LoggingLevel $loggingLevel,

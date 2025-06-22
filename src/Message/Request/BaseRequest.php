@@ -2,19 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Message;
+namespace Maartenpaauw\Mcp\Message\Request;
 
-use Override;
-
-abstract readonly class BaseRequest implements Request
+abstract readonly class BaseRequest
 {
-    #[Override]
     public function parameters(): array
     {
         return [];
     }
 
-    #[Override]
     public function jsonSerialize(): array
     {
         return array_filter(

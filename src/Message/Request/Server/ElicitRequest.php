@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Server\Request;
+namespace Maartenpaauw\Mcp\Message\Request\Server;
 
 use InvalidArgumentException;
-use Maartenpaauw\Mcp\Message\BaseRequest;
-use Maartenpaauw\Mcp\Message\Method;
+use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\RequestedSchema;
 use Override;
 
-final readonly class ElicitRequest extends BaseRequest
+final readonly class ElicitRequest extends BaseRequest implements Request
 {
     public function __construct(
         private string $message,

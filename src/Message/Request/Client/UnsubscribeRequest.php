@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Client\Request;
+namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use InvalidArgumentException;
-use Maartenpaauw\Mcp\Message;
-use Maartenpaauw\Mcp\Message\Method;
+use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\Message\Request\Method;
 use Override;
 
-final readonly class SubscribeRequest extends Message\BaseRequest
+final readonly class UnsubscribeRequest extends BaseRequest implements Request
 {
     public function __construct(
         private string $uri,
@@ -27,7 +27,7 @@ final readonly class SubscribeRequest extends Message\BaseRequest
     #[Override]
     public function method(): Method
     {
-        return Method::Subscribe;
+        return Method::Unsubscribe;
     }
 
     #[Override]

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Message\JsonRpc;
+namespace Maartenpaauw\Mcp\JsonRpc;
 
 use Override;
 
@@ -11,7 +11,7 @@ final readonly class Request implements Message
     public function __construct(
         private Version $version,
         private RequestIdentifier $identifier,
-        private \Maartenpaauw\Mcp\Message\Request $request,
+        private \Maartenpaauw\Mcp\Message\Request\Request $request,
     ) {}
 
     public function version(): Version
@@ -24,7 +24,7 @@ final readonly class Request implements Message
         return $this->identifier;
     }
 
-    public function request(): \Maartenpaauw\Mcp\Message\Request
+    public function request(): \Maartenpaauw\Mcp\Message\Request\Request
     {
         return $this->request;
     }

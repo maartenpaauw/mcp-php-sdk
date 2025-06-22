@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Message;
+namespace Maartenpaauw\Mcp\Message\Request;
 
 enum Method: string
 {

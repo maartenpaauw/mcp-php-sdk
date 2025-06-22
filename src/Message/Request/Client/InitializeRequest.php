@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Client\Request;
+namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use Maartenpaauw\Mcp\ClientCapabilities;
 use Maartenpaauw\Mcp\Implementation;
-use Maartenpaauw\Mcp\Message\BaseRequest;
-use Maartenpaauw\Mcp\Message\Method;
+use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\ProtocolVersion;
 use Override;
 
-final readonly class InitializeRequest extends BaseRequest
+final readonly class InitializeRequest extends BaseRequest implements Request
 {
     public function __construct(
         private ProtocolVersion $protocolVersion,

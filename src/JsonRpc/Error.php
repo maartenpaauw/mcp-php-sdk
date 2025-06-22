@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Message\JsonRpc;
+namespace Maartenpaauw\Mcp\JsonRpc;
 
 use Override;
 

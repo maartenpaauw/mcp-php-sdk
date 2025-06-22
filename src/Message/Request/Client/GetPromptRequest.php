@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Client\Request;
+namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use InvalidArgumentException;
-use Maartenpaauw\Mcp\Message\BaseRequest;
-use Maartenpaauw\Mcp\Message\Method;
+use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\Message\Request\Method;
 use Override;
 
-final readonly class GetPromptRequest extends BaseRequest
+final readonly class GetPromptRequest extends BaseRequest implements Request
 {
     public function __construct(
         private string $name,
