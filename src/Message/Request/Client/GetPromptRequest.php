@@ -7,6 +7,7 @@ namespace Maartenpaauw\Mcp\Message\Request\Client;
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\Message\Request\BaseRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
+use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
 use Override;
 
 final readonly class GetPromptRequest extends BaseRequest implements Request
@@ -49,14 +50,12 @@ final readonly class GetPromptRequest extends BaseRequest implements Request
     #[Override]
     public function parameters(): array
     {
-        $parameters = [
-            'name' => $this->name,
-        ];
-
-        if ($this->arguments !== null || $this->arguments !== []) {
-            $parameters['arguments'] = $this->arguments;
-        }
-
-        return $parameters;
+        return array_filter(
+            array: [
+                'name' => $this->name,
+                'arguments' => $this->arguments,
+            ],
+            callback: new ParameterFilter(),
+        );
     }
 }

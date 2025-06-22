@@ -8,5 +8,8 @@ use JsonSerializable;
 
 interface Message extends JsonSerializable
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array;
 }
