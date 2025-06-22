@@ -16,9 +16,9 @@ abstract readonly class BaseRequest
         return array_filter(
             array: [
                 'method' => $this->method(),
-                'parameters' => $this->parameters(),
+                'params' => $this->parameters(),
             ],
-            callback: static fn (mixed $item): bool => $item !== [],
+            callback: new ParameterFilter(),
         );
     }
 }
