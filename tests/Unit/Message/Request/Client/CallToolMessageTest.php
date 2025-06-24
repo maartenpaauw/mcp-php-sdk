@@ -7,6 +7,7 @@ namespace Maartenpaauw\Mcp\Tests\Unit\Message\Request\Client;
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\Message\Request\Client\CallToolRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 use Maartenpaauw\Mcp\Tests\Unit\Message\Request\RequestTestCase;
 use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -21,7 +22,7 @@ final class CallToolMessageTest extends RequestTestCase
         self::expectException(exception: InvalidArgumentException::class);
         self::expectExceptionMessage(message: 'Name cannot be empty');
 
-        new CallToolRequest(name: '');
+        new CallToolRequest(name: new Name(''));
     }
 
     #[Test]
@@ -31,7 +32,7 @@ final class CallToolMessageTest extends RequestTestCase
         self::expectExceptionMessage(message: 'Argument name must be a string');
 
         new CallToolRequest(
-            name: 'get_weather',
+            name: new Name('get_weather'),
             arguments: [
                 1 => 'Oegstgeest',
             ],
@@ -44,7 +45,7 @@ final class CallToolMessageTest extends RequestTestCase
         return [
             [
                 new CallToolRequest(
-                    name: 'get_weather',
+                    name: new Name('get_weather'),
                     arguments: [
                         'location' => 'Oegstgeest',
                     ],
@@ -61,7 +62,7 @@ final class CallToolMessageTest extends RequestTestCase
             ],
             [
                 new CallToolRequest(
-                    name: 'get_weather',
+                    name: new Name('get_weather'),
                 ),
                 [
                     'method' => 'tools/call',
@@ -79,7 +80,7 @@ final class CallToolMessageTest extends RequestTestCase
         return [
             [
                 new CallToolRequest(
-                    name: 'get_weather',
+                    name: new Name('get_weather'),
                     arguments: [
                         'location' => 'Oegstgeest',
                     ],
@@ -95,13 +96,13 @@ final class CallToolMessageTest extends RequestTestCase
         return [
             [
                 new CallToolRequest(
-                    name: 'get_weather',
+                    name: new Name('get_weather'),
                     arguments: [
                         'location' => 'Oegstgeest',
                     ],
                 ),
                 [
-                    'name' => 'get_weather',
+                    'name' => new Name('get_weather'),
                     'arguments' => [
                         'location' => 'Oegstgeest',
                     ],
@@ -109,10 +110,10 @@ final class CallToolMessageTest extends RequestTestCase
             ],
             [
                 new CallToolRequest(
-                    name: 'get_weather',
+                    name: new Name('get_weather'),
                 ),
                 [
-                    'name' => 'get_weather',
+                    'name' => new Name('get_weather'),
                 ],
             ],
         ];

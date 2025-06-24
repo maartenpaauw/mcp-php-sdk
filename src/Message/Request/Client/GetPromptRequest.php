@@ -7,19 +7,16 @@ namespace Maartenpaauw\Mcp\Message\Request\Client;
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\Message\Request\BaseRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
+use Maartenpaauw\Mcp\Message\Request\Name;
 use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
 use Override;
 
 final readonly class GetPromptRequest extends BaseRequest implements Request
 {
     public function __construct(
-        private string $name,
-        private ?array $arguments = null,
+        private Name $name,
+        private array $arguments = [],
     ) {
-        if ($this->name === '') {
-            throw new InvalidArgumentException(message: 'Name cannot be empty');
-        }
-
         foreach ($this->arguments as $key => $argument) {
             if (is_string($key) === false) {
                 throw new InvalidArgumentException(message: 'Key must be a string');
@@ -31,7 +28,7 @@ final readonly class GetPromptRequest extends BaseRequest implements Request
         }
     }
 
-    public function name(): string
+    public function name(): Name
     {
         return $this->name;
     }

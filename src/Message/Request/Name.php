@@ -1,0 +1,33 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Maartenpaauw\Mcp\Message\Request;
+
+use InvalidArgumentException;
+use JsonSerializable;
+use Override;
+use Stringable;
+
+final readonly class Name implements Stringable, JsonSerializable
+{
+    public function __construct(
+        private string $value,
+    ) {
+        if ($this->value === '') {
+            throw new InvalidArgumentException(message: 'Name cannot be empty');
+        }
+    }
+
+    #[Override]
+    public function __toString(): string
+    {
+        return $this->value;
+    }
+
+    #[Override]
+    public function jsonSerialize(): string
+    {
+        return $this->value;
+    }
+}
