@@ -30,6 +30,23 @@ final class CallToolMessageTest extends RequestTestCase
         );
     }
 
+    #[Test]
+    public function it_should_be_possible_to_receive_the_given_parameters(): void
+    {
+        $name = new Name(value: 'get_weather');
+        $arguments = [
+            'location' => 'Oegstgeest',
+        ];
+
+        $callToolRequest = new CallToolRequest(
+            name: $name,
+            arguments: $arguments,
+        );
+
+        self::assertSame(expected: $name, actual: $callToolRequest->name());
+        self::assertSame(expected: $arguments, actual: $callToolRequest->arguments());
+    }
+
     #[Override]
     public static function serializedMessageDataProvider(): array
     {
