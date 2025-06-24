@@ -9,7 +9,7 @@ use Override;
 final readonly class PingRequest extends BaseRequest implements Client\Request, Server\Request
 {
     #[Override]
-    public function method(): Method
+    public function getMethod(): Method
     {
         return Method::Ping;
     }

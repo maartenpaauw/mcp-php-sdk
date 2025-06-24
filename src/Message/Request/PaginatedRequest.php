@@ -13,19 +13,16 @@ abstract readonly class PaginatedRequest extends BaseRequest
         private ?Cursor $cursor = null,
     ) {}
 
-    public function cursor(): ?Cursor
+    public function getCursor(): ?Cursor
     {
         return $this->cursor;
     }
 
     #[Override]
-    public function parameters(): array
+    public function getParameters(): array
     {
-        return array_filter(
-            array: [
-                'cursor' => $this->cursor,
-            ],
-            callback: new ParameterFilter(),
-        );
+        return [
+            'cursor' => $this->cursor,
+        ];
     }
 }

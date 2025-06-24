@@ -20,7 +20,7 @@ final readonly class ClientExperimentalCapability implements JsonSerializable
         }
     }
 
-    public function capabilities(): array
+    public function getCapabilities(): array
     {
         return $this->capabilities;
     }

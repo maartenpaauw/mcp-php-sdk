@@ -15,7 +15,7 @@ final readonly class GetPromptRequest extends BaseRequest implements Request
 {
     public function __construct(
         private Name $name,
-        private array $arguments = [],
+        private ?array $arguments = null,
     ) {
         foreach ($this->arguments as $key => $argument) {
             if (is_string($key) === false) {
@@ -28,24 +28,24 @@ final readonly class GetPromptRequest extends BaseRequest implements Request
         }
     }
 
-    public function name(): Name
+    public function getName(): Name
     {
         return $this->name;
     }
 
-    public function arguments(): array
+    public function getArguments(): array
     {
         return $this->arguments;
     }
 
     #[Override]
-    public function method(): Method
+    public function getMethod(): Method
     {
         return Method::GetPrompts;
     }
 
     #[Override]
-    public function parameters(): array
+    public function getParameters(): array
     {
         return array_filter(
             array: [

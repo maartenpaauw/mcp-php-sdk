@@ -43,8 +43,8 @@ final class CallToolMessageTest extends RequestTestCase
             arguments: $arguments,
         );
 
-        self::assertSame(expected: $name, actual: $callToolRequest->name());
-        self::assertSame(expected: $arguments, actual: $callToolRequest->arguments());
+        self::assertSame(expected: $name, actual: $callToolRequest->getName());
+        self::assertSame(expected: $arguments, actual: $callToolRequest->getArguments());
     }
 
     #[Override]

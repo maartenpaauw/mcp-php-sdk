@@ -6,7 +6,7 @@ namespace Maartenpaauw\Mcp\Message\Request;
 
 abstract readonly class BaseRequest
 {
-    public function parameters(): array
+    public function getParameters(): array
     {
         return [];
     }
@@ -14,7 +14,7 @@ abstract readonly class BaseRequest
     public function jsonSerialize(): array
     {
         return array_filter(
-            array: $this->parameters(),
+            array: $this->getParameters(),
             callback: new ParameterFilter(),
         );
     }

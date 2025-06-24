@@ -12,7 +12,7 @@ final readonly class Notification implements Message
         private Version $version,
     ) {}
 
-    public function version(): Version
+    public function getVersion(): Version
     {
         return $this->version;
     }

@@ -30,27 +30,27 @@ final readonly class StringSchema implements PrimitiveSchema
         }
     }
 
-    public function title(): ?string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function description(): ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function minLength(): ?int
+    public function getMinLength(): ?int
     {
         return $this->minLength;
     }
 
-    public function maxLength(): ?int
+    public function getMaxLength(): ?int
     {
         return $this->maxLength;
     }
 
-    public function format(): ?StringSchemaFormat
+    public function getFormat(): ?StringSchemaFormat
     {
         return $this->format;
     }

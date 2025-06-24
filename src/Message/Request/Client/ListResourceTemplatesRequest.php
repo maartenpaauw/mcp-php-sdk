@@ -11,7 +11,7 @@ use Override;
 final readonly class ListResourceTemplatesRequest extends PaginatedRequest implements Request
 {
     #[Override]
-    public function method(): Method
+    public function getMethod(): Method
     {
         return Method::ListResourceTemplates;
     }

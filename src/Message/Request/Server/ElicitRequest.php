@@ -8,6 +8,7 @@ use Maartenpaauw\Mcp\Message\Request\BaseRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Message;
 use Maartenpaauw\Mcp\Message\Request\Parameter\RequestedSchema;
+use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
 use Override;
 
 final readonly class ElicitRequest extends BaseRequest implements Request
@@ -17,28 +18,31 @@ final readonly class ElicitRequest extends BaseRequest implements Request
         private RequestedSchema $requestedSchema,
     ) {}
 
-    public function message(): Message
+    public function getMessage(): Message
     {
         return $this->message;
     }
 
-    public function requestedSchema(): RequestedSchema
+    public function getRequestedSchema(): RequestedSchema
     {
         return $this->requestedSchema;
     }
 
     #[Override]
-    public function method(): Method
+    public function getMethod(): Method
     {
         return Method::CreateElicitation;
     }
 
     #[Override]
-    public function parameters(): array
+    public function getParameters(): array
     {
-        return [
-            'message' => $this->message,
-            'requestedSchema' => $this->requestedSchema,
-        ];
+        return array_filter(
+            array: [
+                'message' => $this->message,
+                'requestedSchema' => $this->requestedSchema,
+            ],
+            callback: new ParameterFilter(),
+        );
     }
 }

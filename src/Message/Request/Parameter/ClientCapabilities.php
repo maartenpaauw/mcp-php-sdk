@@ -18,22 +18,22 @@ final readonly class ClientCapabilities implements JsonSerializable
         private ?ClientElicitationCapability $elicitation = null,
     ) {}
 
-    public function experimental(): ?ClientExperimentalCapability
+    public function getExperimental(): ?ClientExperimentalCapability
     {
         return $this->experimental;
     }
 
-    public function roots(): ?ClientRootsCapability
+    public function getRoots(): ?ClientRootsCapability
     {
         return $this->roots;
     }
 
-    public function sampling(): ?ClientSamplingCapability
+    public function getSampling(): ?ClientSamplingCapability
     {
         return $this->sampling;
     }
 
-    public function elicitation(): ?ClientElicitationCapability
+    public function getElicitation(): ?ClientElicitationCapability
     {
         return $this->elicitation;
     }

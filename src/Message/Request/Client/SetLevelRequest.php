@@ -15,19 +15,19 @@ final readonly class SetLevelRequest extends BaseRequest implements Request
         private LoggingLevel $loggingLevel,
     ) {}
 
-    public function loggingLevel(): LoggingLevel
+    public function getLoggingLevel(): LoggingLevel
     {
         return $this->loggingLevel;
     }
 
     #[Override]
-    public function method(): Method
+    public function getMethod(): Method
     {
         return Method::SetLevel;
     }
 
     #[Override]
-    public function parameters(): array
+    public function getParameters(): array
     {
         return [
             'level' => $this->loggingLevel,

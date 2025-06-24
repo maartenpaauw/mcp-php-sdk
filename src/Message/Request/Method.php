@@ -7,6 +7,9 @@ namespace Maartenpaauw\Mcp\Message\Request;
 enum Method: string
 {
     case CallTool = 'tools/call';
+    case Complete = 'completion/complete';
+    case CreateElicitation = 'elicitation/create';
+    case GetPrompts = 'prompts/get';
     case Initialize = 'initialize';
     case ListPrompts = 'prompts/list';
     case ListResourceTemplates = 'resources/templates/list';
@@ -18,6 +21,4 @@ enum Method: string
     case SetLevel = 'logging/setLevel';
     case Subscribe = 'resources/subscribe';
     case Unsubscribe = 'resources/unsubscribe';
-    case GetPrompts = 'prompts/get';
-    case CreateElicitation = 'elicitation/create';
 }

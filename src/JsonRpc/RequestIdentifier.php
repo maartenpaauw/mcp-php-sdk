@@ -22,7 +22,7 @@ final readonly class RequestIdentifier implements JsonSerializable
         }
     }
 
-    public function value(): int | string
+    public function getValue(): int | string
     {
         return $this->value;
     }

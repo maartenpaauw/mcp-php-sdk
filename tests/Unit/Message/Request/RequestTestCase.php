@@ -11,7 +11,6 @@ use Maartenpaauw\Mcp\Tests\Unit\Message\MessageTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\CoversClassesThatImplementInterface;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\Small;
 use PHPUnit\Framework\Attributes\Test;
 
 #[CoversClass(className: BaseRequest::class)]
@@ -38,13 +37,13 @@ abstract class RequestTestCase extends MessageTestCase
     #[DataProvider('requestMethodDataProvider')]
     public function it_has_the_expected_method(Request $request, Method $expectedMethod): void
     {
-        self::assertEquals(expected: $expectedMethod, actual: $request->method());
+        self::assertEquals(expected: $expectedMethod, actual: $request->getMethod());
     }
 
     #[Test]
     #[DataProvider('requestParametersDataProvider')]
     public function it_has_the_expected_parameters(Request $request, array $parameters): void
     {
-        self::assertEquals(expected: $parameters, actual: $request->parameters());
+        self::assertEquals(expected: $parameters, actual: $request->getParameters());
     }
 }

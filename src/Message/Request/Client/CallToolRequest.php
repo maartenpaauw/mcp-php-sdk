@@ -15,7 +15,7 @@ final readonly class CallToolRequest extends BaseRequest implements Request
 {
     public function __construct(
         private Name $name,
-        private array $arguments = [],
+        private ?array $arguments = null,
     )
     {
         foreach ($this->arguments ?? [] as $argumentName => $argument) {
@@ -25,23 +25,24 @@ final readonly class CallToolRequest extends BaseRequest implements Request
         }
     }
 
-    public function name(): Name
+    public function getName(): Name
     {
         return $this->name;
     }
 
-    public function arguments(): array
+    public function getArguments(): ?array
     {
         return $this->arguments;
     }
 
-    public function method(): Method
+    #[Override]
+    public function getMethod(): Method
     {
         return Method::CallTool;
     }
 
     #[Override]
-    public function parameters(): array
+    public function getParameters(): array
     {
         return array_filter(
             array: [

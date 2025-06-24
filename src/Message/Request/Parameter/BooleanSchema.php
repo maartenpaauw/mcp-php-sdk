@@ -23,17 +23,17 @@ final readonly class BooleanSchema implements PrimitiveSchema
         }
     }
 
-    public function title(): ?string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function description(): ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function default(): ?bool
+    public function isDefault(): ?bool
     {
         return $this->default;
     }

@@ -8,10 +8,10 @@ use Maartenpaauw\Mcp\Message\Message;
 
 interface Request extends Message
 {
-    public function method(): Method;
+    public function getMethod(): Method;
 
     /**
      * @return array<string, mixed>
      */
-    public function parameters(): array;
+    public function getParameters(): array;
 }

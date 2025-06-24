@@ -13,12 +13,12 @@ final readonly class Response implements Message
         private RequestIdentifier $requestIdentifier,
     ) {}
 
-    public function version(): Version
+    public function getVersion(): Version
     {
         return $this->version;
     }
 
-    public function requestIdentifier(): RequestIdentifier
+    public function getRequestIdentifier(): RequestIdentifier
     {
         return $this->requestIdentifier;
     }

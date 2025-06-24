@@ -45,6 +45,16 @@ final readonly class RequestedSchema implements JsonSerializable
         }
     }
 
+    public function getProperties(): array
+    {
+        return $this->properties;
+    }
+
+    public function getRequired(): ?array
+    {
+        return $this->required;
+    }
+
     #[Override]
     public function jsonSerialize(): array
     {

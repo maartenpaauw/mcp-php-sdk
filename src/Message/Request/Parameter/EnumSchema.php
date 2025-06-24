@@ -40,12 +40,12 @@ final readonly class EnumSchema implements PrimitiveSchema
         }
     }
 
-    public function title(): ?string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function description(): ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }

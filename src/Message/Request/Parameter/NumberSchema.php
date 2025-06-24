@@ -15,22 +15,22 @@ final readonly class NumberSchema implements PrimitiveSchema
         private ?int $maximum = null,
     ) {}
 
-    public function title(): ?string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function description(): ?string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function minimum(): ?int
+    public function getMinimum(): ?int
     {
         return $this->minimum;
     }
 
-    public function maximum(): ?int
+    public function getMaximum(): ?int
     {
         return $this->maximum;
     }

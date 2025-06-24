@@ -9,13 +9,13 @@ use JsonSerializable;
 use Override;
 use Stringable;
 
-final readonly class Cursor implements JsonSerializable, Stringable
+final readonly class Title implements Stringable, JsonSerializable
 {
     public function __construct(
         private string $value,
     ) {
         if ($this->value === '') {
-            throw new InvalidArgumentException(message: 'The cursor cannot be empty');
+            throw new InvalidArgumentException(message: 'Title cannot be empty');
         }
     }
 
@@ -25,13 +25,13 @@ final readonly class Cursor implements JsonSerializable, Stringable
     }
 
     #[Override]
-    public function jsonSerialize(): string
+    public function __toString(): string
     {
         return $this->value;
     }
 
     #[Override]
-    public function __toString(): string
+    public function jsonSerialize(): string
     {
         return $this->value;
     }

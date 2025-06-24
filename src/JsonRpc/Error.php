@@ -13,12 +13,12 @@ final readonly class Error implements Message
         private RequestIdentifier $requestIdentifier,
     ) {}
 
-    public function requestIdentifier(): RequestIdentifier
+    public function getRequestIdentifier(): RequestIdentifier
     {
         return $this->requestIdentifier;
     }
 
-    public function version(): Version
+    public function getVersion(): Version
     {
         return $this->version;
     }

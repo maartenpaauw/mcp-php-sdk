@@ -19,6 +19,11 @@ final readonly class Uri implements JsonSerializable, Stringable
         }
     }
 
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
     #[Override]
     public function __toString(): string
     {

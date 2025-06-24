@@ -15,19 +15,19 @@ final readonly class ReadResourceRequest extends BaseRequest implements Request
         private Uri $uri,
     ) {}
 
-    public function uri(): Uri
+    public function getUri(): Uri
     {
         return $this->uri;
     }
 
     #[Override]
-    public function method(): Method
+    public function getMethod(): Method
     {
         return Method::ReadResource;
     }
 
     #[Override]
-    public function parameters(): array
+    public function getParameters(): array
     {
         return [
             'uri' => $this->uri,

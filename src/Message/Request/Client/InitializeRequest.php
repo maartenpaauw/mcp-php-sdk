@@ -19,29 +19,29 @@ final readonly class InitializeRequest extends BaseRequest implements Request
         private Implementation $clientInformation,
     ) {}
 
-    public function protocolVersion(): ProtocolVersion
+    public function getProtocolVersion(): ProtocolVersion
     {
         return $this->protocolVersion;
     }
 
-    public function clientCapabilities(): ClientCapabilities
+    public function getClientCapabilities(): ClientCapabilities
     {
         return $this->clientCapabilities;
     }
 
-    public function clientInformation(): Implementation
+    public function getClientInformation(): Implementation
     {
         return $this->clientInformation;
     }
 
     #[Override]
-    public function method(): Method
+    public function getMethod(): Method
     {
         return Method::Initialize;
     }
 
     #[Override]
-    public function parameters(): array
+    public function getParameters(): array
     {
         return [
             'protocolVersion' => $this->protocolVersion,

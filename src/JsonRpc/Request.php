@@ -14,17 +14,17 @@ final readonly class Request implements Message
         private \Maartenpaauw\Mcp\Message\Request\Request $request,
     ) {}
 
-    public function version(): Version
+    public function getVersion(): Version
     {
         return $this->version;
     }
 
-    public function identifier(): RequestIdentifier
+    public function getIdentifier(): RequestIdentifier
     {
         return $this->identifier;
     }
 
-    public function request(): \Maartenpaauw\Mcp\Message\Request\Request
+    public function getRequest(): \Maartenpaauw\Mcp\Message\Request\Request
     {
         return $this->request;
     }
@@ -35,10 +35,10 @@ final readonly class Request implements Message
         $data = [
             'jsonrpc' => $this->version,
             'id' => $this->identifier,
-            'method' => $this->request->method(),
+            'method' => $this->request->getMethod(),
         ];
 
-        $parameters = $this->request->parameters();
+        $parameters = $this->request->getParameters();
 
         if ($parameters !== []) {
             $data['params'] = $parameters;
