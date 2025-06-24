@@ -14,10 +14,7 @@ abstract readonly class BaseRequest
     public function jsonSerialize(): array
     {
         return array_filter(
-            array: [
-                'method' => $this->method(),
-                'params' => $this->parameters(),
-            ],
+            array: $this->parameters(),
             callback: new ParameterFilter(),
         );
     }

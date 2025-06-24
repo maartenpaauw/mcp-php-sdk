@@ -59,12 +59,9 @@ final class CallToolMessageTest extends RequestTestCase
                     ],
                 ),
                 [
-                    'method' => 'tools/call',
-                    'params' => [
-                        'name' => 'get_weather',
-                        'arguments' => [
-                            'location' => 'Oegstgeest',
-                        ],
+                    'name' => 'get_weather',
+                    'arguments' => [
+                        'location' => 'Oegstgeest',
                     ],
                 ],
             ],
@@ -73,10 +70,7 @@ final class CallToolMessageTest extends RequestTestCase
                     name: new Name(value: 'get_weather'),
                 ),
                 [
-                    'method' => 'tools/call',
-                    'params' => [
-                        'name' => 'get_weather',
-                    ],
+                    'name' => 'get_weather',
                 ],
             ],
         ];
