@@ -28,7 +28,7 @@ final readonly class RequestIdentifier implements JsonSerializable
     }
 
     #[Override]
-    public function jsonSerialize(): string
+    public function jsonSerialize(): int | string
     {
         return $this->value;
     }
