@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Server;
 
 use Maartenpaauw\Mcp\Message\Request\BaseRequest;
-use Maartenpaauw\Mcp\Message\Request\Message;
 use Maartenpaauw\Mcp\Message\Request\Method;
-use Maartenpaauw\Mcp\RequestedSchema;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Message;
+use Maartenpaauw\Mcp\Message\Request\Parameter\RequestedSchema;
 use Override;
 
 final readonly class ElicitRequest extends BaseRequest implements Request

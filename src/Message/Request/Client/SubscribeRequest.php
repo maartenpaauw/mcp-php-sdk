@@ -6,7 +6,7 @@ namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use Maartenpaauw\Mcp\Message\Request\BaseRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
-use Maartenpaauw\Mcp\Message\Request\Uri;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Uri;
 use Override;
 
 final readonly class SubscribeRequest extends BaseRequest implements Request

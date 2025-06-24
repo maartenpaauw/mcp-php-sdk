@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Client;
 
-use Maartenpaauw\Mcp\LoggingLevel;
 use Maartenpaauw\Mcp\Message\Request\BaseRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
+use Maartenpaauw\Mcp\Message\Request\Parameter\LoggingLevel;
 use Override;
 
 final readonly class SetLevelRequest extends BaseRequest implements Request

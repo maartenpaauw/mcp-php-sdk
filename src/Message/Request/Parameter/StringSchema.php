@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp;
+namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
 use LogicException;

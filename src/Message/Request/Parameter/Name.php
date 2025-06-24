@@ -2,23 +2,25 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp;
+namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
 use JsonSerializable;
 use Override;
+use Stringable;
 
-final readonly class Cursor implements JsonSerializable
+final readonly class Name implements Stringable, JsonSerializable
 {
     public function __construct(
         private string $value,
     ) {
         if ($this->value === '') {
-            throw new InvalidArgumentException(message: 'Value cannot be empty');
+            throw new InvalidArgumentException(message: 'Name cannot be empty');
         }
     }
 
-    public function value(): string
+    #[Override]
+    public function __toString(): string
     {
         return $this->value;
     }

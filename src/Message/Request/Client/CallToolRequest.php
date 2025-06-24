@@ -7,7 +7,7 @@ namespace Maartenpaauw\Mcp\Message\Request\Client;
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\Message\Request\BaseRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
-use Maartenpaauw\Mcp\Message\Request\Name;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
 use Override;
 
