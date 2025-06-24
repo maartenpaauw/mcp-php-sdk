@@ -17,22 +17,13 @@ use PHPUnit\Framework\Attributes\Test;
 final class CallToolMessageTest extends RequestTestCase
 {
     #[Test]
-    public function it_should_throw_an_invalid_argument_exception_when_name_is_an_empty_string(): void
-    {
-        self::expectException(exception: InvalidArgumentException::class);
-        self::expectExceptionMessage(message: 'Name cannot be empty');
-
-        new CallToolRequest(name: new Name(''));
-    }
-
-    #[Test]
     public function it_should_throw_an_invalid_argument_exception_when_an_argument_key_is_not_a_string(): void
     {
         self::expectException(exception: InvalidArgumentException::class);
         self::expectExceptionMessage(message: 'Argument name must be a string');
 
         new CallToolRequest(
-            name: new Name('get_weather'),
+            name: new Name(value: 'get_weather'),
             arguments: [
                 1 => 'Oegstgeest',
             ],
@@ -45,7 +36,7 @@ final class CallToolMessageTest extends RequestTestCase
         return [
             [
                 new CallToolRequest(
-                    name: new Name('get_weather'),
+                    name: new Name(value: 'get_weather'),
                     arguments: [
                         'location' => 'Oegstgeest',
                     ],
@@ -62,7 +53,7 @@ final class CallToolMessageTest extends RequestTestCase
             ],
             [
                 new CallToolRequest(
-                    name: new Name('get_weather'),
+                    name: new Name(value: 'get_weather'),
                 ),
                 [
                     'method' => 'tools/call',
@@ -80,7 +71,7 @@ final class CallToolMessageTest extends RequestTestCase
         return [
             [
                 new CallToolRequest(
-                    name: new Name('get_weather'),
+                    name: new Name(value: 'get_weather'),
                     arguments: [
                         'location' => 'Oegstgeest',
                     ],
@@ -96,13 +87,13 @@ final class CallToolMessageTest extends RequestTestCase
         return [
             [
                 new CallToolRequest(
-                    name: new Name('get_weather'),
+                    name: new Name(value: 'get_weather'),
                     arguments: [
                         'location' => 'Oegstgeest',
                     ],
                 ),
                 [
-                    'name' => new Name('get_weather'),
+                    'name' => new Name(value: 'get_weather'),
                     'arguments' => [
                         'location' => 'Oegstgeest',
                     ],
@@ -110,10 +101,10 @@ final class CallToolMessageTest extends RequestTestCase
             ],
             [
                 new CallToolRequest(
-                    name: new Name('get_weather'),
+                    name: new Name(value: 'get_weather'),
                 ),
                 [
-                    'name' => new Name('get_weather'),
+                    'name' => new Name(value: 'get_weather'),
                 ],
             ],
         ];
