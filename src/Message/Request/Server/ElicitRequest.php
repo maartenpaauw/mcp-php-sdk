@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Server;
 
-use InvalidArgumentException;
 use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\Message\Request\Message;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\RequestedSchema;
 use Override;
@@ -13,18 +13,13 @@ use Override;
 final readonly class ElicitRequest extends BaseRequest implements Request
 {
     public function __construct(
-        private string $message,
+        private Message $message,
         private RequestedSchema $requestedSchema,
-    ) {
-        if ($this->message === '') {
-            throw new InvalidArgumentException(message: 'Message cannot be empty');
-        }
-    }
+    ) {}
 
-    public function message(): string
+    public function message(): Message
     {
         return $this->message;
-
     }
 
     public function requestedSchema(): RequestedSchema
