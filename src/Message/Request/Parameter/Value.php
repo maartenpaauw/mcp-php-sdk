@@ -15,7 +15,7 @@ final readonly class Value implements JsonSerializable, Stringable
         private string $value,
     ) {
         if ($this->value === '') {
-            throw new InvalidArgumentException(message: 'Title cannot be empty');
+            throw new InvalidArgumentException(message: 'Value cannot be empty');
         }
     }
 
