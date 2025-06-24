@@ -26,6 +26,11 @@ final readonly class SetLevelRequest extends BaseRequest implements Request
         return Method::SetLevel;
     }
 
+    /**
+     * @return array{
+     *     level: LoggingLevel,
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {

@@ -34,6 +34,12 @@ final readonly class GetPromptRequest extends BaseRequest implements Request
         return Method::GetPrompts;
     }
 
+    /**
+     * @return array{
+     *     name: Name,
+     *     arguments?: Arguments,
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {

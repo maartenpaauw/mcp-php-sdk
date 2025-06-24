@@ -26,6 +26,11 @@ final readonly class UnsubscribeRequest extends BaseRequest implements Request
         return Method::Unsubscribe;
     }
 
+    /**
+     * @return array{
+     *     uri: Uri,
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {

@@ -13,6 +13,10 @@ use Override;
 
 final readonly class CallToolRequest extends BaseRequest implements Request
 {
+    /**
+     * @param Name $name
+     * @param array<string, mixed>|null $arguments
+     */
     public function __construct(
         private Name $name,
         private ?array $arguments = null,
@@ -30,6 +34,9 @@ final readonly class CallToolRequest extends BaseRequest implements Request
         return $this->name;
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getArguments(): ?array
     {
         return $this->arguments;
@@ -41,6 +48,12 @@ final readonly class CallToolRequest extends BaseRequest implements Request
         return Method::CallTool;
     }
 
+    /**
+     * @return array{
+     *     name: Name,
+     *     arguments?: array<string, mixed>
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {

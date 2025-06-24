@@ -26,6 +26,11 @@ final readonly class SubscribeRequest extends BaseRequest implements Request
         return Method::Subscribe;
     }
 
+    /**
+     * @return array{
+     *     uri: Uri,
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {

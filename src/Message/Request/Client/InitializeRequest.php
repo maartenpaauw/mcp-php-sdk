@@ -40,6 +40,13 @@ final readonly class InitializeRequest extends BaseRequest implements Request
         return Method::Initialize;
     }
 
+    /**
+     * @return array{
+     *     protocolVersion: ProtocolVersion,
+     *     capabilities: ClientCapabilities,
+     *     clientInfo: Implementation,
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {

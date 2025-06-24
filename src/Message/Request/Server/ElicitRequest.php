@@ -34,15 +34,18 @@ final readonly class ElicitRequest extends BaseRequest implements Request
         return Method::CreateElicitation;
     }
 
+    /**
+     * @return array{
+     *     message: Message,
+     *     requestedSchema: RequestedSchema,
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {
-        return array_filter(
-            array: [
-                'message' => $this->message,
-                'requestedSchema' => $this->requestedSchema,
-            ],
-            callback: new ParameterFilter(),
-        );
+        return [
+            'message' => $this->message,
+            'requestedSchema' => $this->requestedSchema,
+        ];
     }
 }

@@ -26,6 +26,11 @@ final readonly class ReadResourceRequest extends BaseRequest implements Request
         return Method::ReadResource;
     }
 
+    /**
+     * @return array{
+     *     uri: Uri,
+     * }
+     */
     #[Override]
     public function getParameters(): array
     {
