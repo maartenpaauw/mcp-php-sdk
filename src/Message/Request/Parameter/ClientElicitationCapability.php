@@ -6,12 +6,13 @@ namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use JsonSerializable;
 use Override;
+use stdClass;
 
 final readonly class ClientElicitationCapability implements JsonSerializable
 {
     #[Override]
-    public function jsonSerialize(): array
+    public function jsonSerialize(): stdClass
     {
-        return [];
+        return new stdClass();
     }
 }

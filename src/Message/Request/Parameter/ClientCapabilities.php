@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use JsonSerializable;
+use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
 use Override;
+use stdClass;
 
 final readonly class ClientCapabilities implements JsonSerializable
 {
@@ -36,27 +38,26 @@ final readonly class ClientCapabilities implements JsonSerializable
         return $this->elicitation;
     }
 
+    /**
+     * @return array<string, JsonSerializable>|stdClass
+     */
     #[Override]
-    public function jsonSerialize(): array
+    public function jsonSerialize(): array | stdClass
     {
-        $data = [];
+        $data = array_filter(
+            array: [
+                'experimental' => $this->experimental,
+                'roots' => $this->roots,
+                'sampling' => $this->sampling,
+                'elicitation' => $this->elicitation,
+            ],
+            callback: new ParameterFilter(),
+        );
 
-        if ($this->experimental !== null) {
-            $data['experimental'] = $this->experimental;
+        if ($data !== []) {
+            return $data;
         }
 
-        if ($this->roots !== null) {
-            $data['roots'] = $this->roots;
-        }
-
-        if ($this->sampling !== null) {
-            $data['sampling'] = $this->sampling;
-        }
-
-        if ($this->elicitation !== null) {
-            $data['elicitation'] = $this->elicitation;
-        }
-
-        return $data;
+        return new stdClass();
     }
 }
