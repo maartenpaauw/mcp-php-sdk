@@ -14,7 +14,7 @@ final readonly class Cursor implements JsonSerializable
         private string $value,
     ) {
         if ($this->value === '') {
-            throw new InvalidArgumentException(message: 'Value cannot be empty');
+            throw new InvalidArgumentException(message: 'The cursor cannot be empty');
         }
     }
 
