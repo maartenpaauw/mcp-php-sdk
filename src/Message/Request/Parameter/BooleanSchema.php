@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
 final readonly class BooleanSchema implements PrimitiveSchema
 {
@@ -23,29 +23,27 @@ final readonly class BooleanSchema implements PrimitiveSchema
         }
     }
 
-    public function getTitle(): ?string
+    #[JsonRpc\Parameter]
+    public function type(): string
+    {
+        return 'boolean';
+    }
+
+    #[JsonRpc\Parameter]
+    public function title(): ?string
     {
         return $this->title;
     }
 
-    public function getDescription(): ?string
+    #[JsonRpc\Parameter]
+    public function description(): ?string
     {
         return $this->description;
     }
 
-    public function isDefault(): ?bool
+    #[JsonRpc\Parameter]
+    public function default(): ?bool
     {
         return $this->default;
-    }
-
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return array_filter(array: [
-            'type' => 'boolean',
-            'title' => $this->title,
-            'description' => $this->description,
-            'default' => $this->default,
-        ]);
     }
 }

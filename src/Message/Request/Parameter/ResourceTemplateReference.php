@@ -4,32 +4,23 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
-use JsonSerializable;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class ResourceTemplateReference implements JsonSerializable
+final readonly class ResourceTemplateReference implements Parameter
 {
     public function __construct(
         private Uri $uri,
     ) {}
 
-    public function getUri(): Uri
+    #[JsonRpc\Parameter]
+    public function type(): string
     {
-        return $this->uri;
+        return 'ref/resource';
     }
 
-    /**
-     * @return array{
-     *     type: string,
-     *     uri: Uri,
-     * }
-     */
-    #[Override]
-    public function jsonSerialize(): array
+    #[JsonRpc\Parameter]
+    public function uri(): Uri
     {
-        return [
-            'type' => 'ref/resource',
-            'uri' => $this->uri,
-        ];
+        return $this->uri;
     }
 }

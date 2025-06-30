@@ -4,44 +4,30 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
-use JsonSerializable;
-use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class PromptReference implements JsonSerializable
+final readonly class PromptReference implements Parameter
 {
     public function __construct(
         private Name $name,
         private ?Title $title = null,
     ) {}
 
-    public function getName(): Name
+    #[JsonRpc\Parameter]
+    public function type(): string
+    {
+        return 'ref/prompt';
+    }
+
+    #[JsonRpc\Parameter]
+    public function name(): Name
     {
         return $this->name;
     }
 
-    public function getTitle(): ?Title
+    #[JsonRpc\Parameter]
+    public function title(): ?Title
     {
         return $this->title;
-    }
-
-    /**
-     * @return array{
-     *     type: string,
-     *     name: Name,
-     *     title?: Title
-     * }
-     */
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return array_filter(
-            array: [
-                'type' => 'ref/prompt',
-                'name' => $this->name,
-                'title' => $this->title,
-            ],
-            callback: new ParameterFilter(),
-        );
     }
 }

@@ -4,38 +4,24 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
-use JsonSerializable;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class Argument implements JsonSerializable
+final readonly class Argument implements Parameter
 {
     public function __construct(
         private Name $name,
         private Value $value,
     ) {}
 
-    public function getName(): Name
+    #[JsonRpc\Parameter]
+    public function name(): Name
     {
         return $this->name;
     }
 
-    public function getValue(): Value
+    #[JsonRpc\Parameter]
+    public function value(): Value
     {
         return $this->value;
-    }
-
-    /**
-     * @return array{
-     *     name: Name,
-     *     value: Value,
-     * }
-     */
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return [
-            'name' => $this->name,
-            'value' => $this->value,
-        ];
     }
 }

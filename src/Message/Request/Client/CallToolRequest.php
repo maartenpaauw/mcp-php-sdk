@@ -5,13 +5,12 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use InvalidArgumentException;
-use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
-use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
-use Override;
 
-final readonly class CallToolRequest extends BaseRequest implements Request
+#[JsonRpc\Method(Method::CallTool)]
+final readonly class CallToolRequest implements Request
 {
     /**
      * @param Name $name
@@ -29,7 +28,8 @@ final readonly class CallToolRequest extends BaseRequest implements Request
         }
     }
 
-    public function getName(): Name
+    #[JsonRpc\Parameter]
+    public function name(): Name
     {
         return $this->name;
     }
@@ -37,32 +37,9 @@ final readonly class CallToolRequest extends BaseRequest implements Request
     /**
      * @return array<string, mixed>|null
      */
-    public function getArguments(): ?array
+    #[JsonRpc\Parameter]
+    public function arguments(): ?array
     {
         return $this->arguments;
-    }
-
-    #[Override]
-    public function getMethod(): Method
-    {
-        return Method::CallTool;
-    }
-
-    /**
-     * @return array{
-     *     name: Name,
-     *     arguments?: array<string, mixed>,
-     * }
-     */
-    #[Override]
-    public function getParameters(): array
-    {
-        return array_filter(
-            array: [
-                'name' => $this->name,
-                'arguments' => $this->arguments,
-            ],
-            callback: new ParameterFilter(),
-        );
     }
 }

@@ -9,7 +9,7 @@ use JsonSerializable;
 use Override;
 use Stringable;
 
-final readonly class Value implements JsonSerializable, Stringable
+final readonly class Value implements Stringable, JsonSerializable
 {
     public function __construct(
         private string $value,
@@ -19,7 +19,7 @@ final readonly class Value implements JsonSerializable, Stringable
         }
     }
 
-    public function getValue(): string
+    public function value(): string
     {
         return $this->value;
     }

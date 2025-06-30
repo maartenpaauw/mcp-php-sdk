@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
-use JsonSerializable;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class ClientExperimentalCapability implements JsonSerializable
+final readonly class ClientExperimentalCapability implements Parameter
 {
+    /**
+     * @param array<string, mixed> $capabilities
+     */
     public function __construct(
         private array $capabilities,
     ) {
@@ -20,13 +22,11 @@ final readonly class ClientExperimentalCapability implements JsonSerializable
         }
     }
 
-    public function getCapabilities(): array
-    {
-        return $this->capabilities;
-    }
-
-    #[Override]
-    public function jsonSerialize(): array
+    /**
+     * @return array<string, mixed>
+     */
+    #[JsonRpc\Parameter]
+    public function capabilities(): array
     {
         return $this->capabilities;
     }

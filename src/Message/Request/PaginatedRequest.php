@@ -4,33 +4,18 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request;
 
+use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Cursor;
-use Override;
 
-abstract readonly class PaginatedRequest extends BaseRequest
+abstract readonly class PaginatedRequest
 {
     public function __construct(
         private ?Cursor $cursor = null,
     ) {}
 
-    public function getCursor(): ?Cursor
+    #[JsonRpc\Parameter]
+    public function cursor(): ?Cursor
     {
         return $this->cursor;
-    }
-
-    /**
-     * @return array{
-     *     cursor?: Cursor
-     * }
-     */
-    #[Override]
-    public function getParameters(): array
-    {
-        return array_filter(
-            array: [
-                'cursor' => $this->cursor,
-            ],
-            callback: new ParameterFilter(),
-        );
     }
 }

@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
-use JsonSerializable;
-use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
-use Override;
-use stdClass;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class ClientCapabilities implements JsonSerializable
+final readonly class ClientCapabilities implements Parameter
 {
     public function __construct(
         private ?ClientExperimentalCapability $experimental = null,
@@ -18,46 +15,27 @@ final readonly class ClientCapabilities implements JsonSerializable
         private ?ClientElicitationCapability $elicitation = null,
     ) {}
 
-    public function getExperimental(): ?ClientExperimentalCapability
+    #[JsonRpc\Parameter]
+    public function experimental(): ?ClientExperimentalCapability
     {
         return $this->experimental;
     }
 
-    public function getRoots(): ?ClientRootsCapability
+    #[JsonRpc\Parameter]
+    public function roots(): ?ClientRootsCapability
     {
         return $this->roots;
     }
 
-    public function getSampling(): ?ClientSamplingCapability
+    #[JsonRpc\Parameter]
+    public function sampling(): ?ClientSamplingCapability
     {
         return $this->sampling;
     }
 
-    public function getElicitation(): ?ClientElicitationCapability
+    #[JsonRpc\Parameter]
+    public function elicitation(): ?ClientElicitationCapability
     {
         return $this->elicitation;
-    }
-
-    /**
-     * @return array<string, JsonSerializable>|stdClass
-     */
-    #[Override]
-    public function jsonSerialize(): array | stdClass
-    {
-        $data = array_filter(
-            array: [
-                'experimental' => $this->experimental,
-                'roots' => $this->roots,
-                'sampling' => $this->sampling,
-                'elicitation' => $this->elicitation,
-            ],
-            callback: new ParameterFilter(),
-        );
-
-        if ($data !== []) {
-            return $data;
-        }
-
-        return new stdClass();
     }
 }

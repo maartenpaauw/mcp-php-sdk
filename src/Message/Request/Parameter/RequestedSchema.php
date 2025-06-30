@@ -5,10 +5,9 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
-use JsonSerializable;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class RequestedSchema implements JsonSerializable
+final readonly class RequestedSchema implements Parameter
 {
     public function __construct(
         private array $properties,
@@ -45,23 +44,21 @@ final readonly class RequestedSchema implements JsonSerializable
         }
     }
 
-    public function getProperties(): array
+    #[JsonRpc\Parameter]
+    public function type(): string
+    {
+        return 'object';
+    }
+
+    #[JsonRpc\Parameter]
+    public function properties(): array
     {
         return $this->properties;
     }
 
-    public function getRequired(): ?array
+    #[JsonRpc\Parameter]
+    public function required(): ?array
     {
         return $this->required;
-    }
-
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return array_filter(array: [
-            'type' => 'object',
-            'properties' => $this->properties,
-            'required' => $this->required,
-        ]);
     }
 }

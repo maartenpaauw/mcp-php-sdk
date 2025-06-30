@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
-use JsonSerializable;
-use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class Implementation implements JsonSerializable
+final readonly class Implementation implements Parameter
 {
     public function __construct(
         private string $name,
@@ -30,31 +28,21 @@ final readonly class Implementation implements JsonSerializable
         }
     }
 
-    public function getName(): string
+    #[JsonRpc\Parameter]
+    public function name(): string
     {
         return $this->name;
     }
 
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function getVersion(): string
+    #[JsonRpc\Parameter]
+    public function version(): string
     {
         return $this->version;
     }
 
-    #[Override]
-    public function jsonSerialize(): array
+    #[JsonRpc\Parameter]
+    public function title(): ?string
     {
-        return array_filter(
-            array: [
-                'name' => $this->name,
-                'version' => $this->version,
-                'title' => $this->title,
-            ],
-            callback: new ParameterFilter(),
-        );
+        return $this->title;
     }
 }

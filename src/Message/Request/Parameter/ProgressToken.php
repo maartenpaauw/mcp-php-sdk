@@ -22,7 +22,7 @@ final readonly class ProgressToken implements JsonSerializable
         }
     }
 
-    public function getValue(): int | string
+    public function value(): int | string
     {
         return $this->value;
     }

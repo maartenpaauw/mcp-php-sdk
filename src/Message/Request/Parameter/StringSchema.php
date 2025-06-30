@@ -6,7 +6,7 @@ namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
 use LogicException;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
 final readonly class StringSchema implements PrimitiveSchema
 {
@@ -30,41 +30,38 @@ final readonly class StringSchema implements PrimitiveSchema
         }
     }
 
-    public function getTitle(): ?string
+    public function type(): string
+    {
+        return 'string';
+    }
+
+    #[JsonRpc\Parameter]
+    public function title(): ?string
     {
         return $this->title;
     }
 
-    public function getDescription(): ?string
+    #[JsonRpc\Parameter]
+    public function description(): ?string
     {
         return $this->description;
     }
 
-    public function getMinLength(): ?int
+    #[JsonRpc\Parameter]
+    public function minLength(): ?int
     {
         return $this->minLength;
     }
 
-    public function getMaxLength(): ?int
+    #[JsonRpc\Parameter]
+    public function maxLength(): ?int
     {
         return $this->maxLength;
     }
 
-    public function getFormat(): ?StringSchemaFormat
+    #[JsonRpc\Parameter]
+    public function format(): ?StringSchemaFormat
     {
         return $this->format;
-    }
-
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return array_filter(array: [
-            'type' => 'string',
-            'title' => $this->title,
-            'description' => $this->description,
-            'minLength' => $this->minLength,
-            'maxLength' => $this->maxLength,
-            'format' => $this->format,
-        ]);
     }
 }

@@ -4,15 +4,9 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Client;
 
+use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\PaginatedRequest;
-use Override;
 
-final readonly class ListResourceTemplatesRequest extends PaginatedRequest implements Request
-{
-    #[Override]
-    public function getMethod(): Method
-    {
-        return Method::ListResourceTemplates;
-    }
-}
+#[JsonRpc\Method(Method::ListResourceTemplates)]
+final readonly class ListResourceTemplatesRequest extends PaginatedRequest implements Request {}

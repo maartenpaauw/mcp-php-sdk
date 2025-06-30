@@ -4,25 +4,17 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
-use JsonSerializable;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class ClientRootsCapability implements JsonSerializable
+final readonly class ClientRootsCapability implements Parameter
 {
     public function __construct(
-        private bool $listChanged,
+        private ?bool $listChanged = null,
     ) {}
 
-    public function listChanged(): bool
+    #[JsonRpc\Parameter]
+    public function listChanged(): ?bool
     {
         return $this->listChanged;
-    }
-
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return [
-            'listChanged' => $this->listChanged,
-        ];
     }
 }

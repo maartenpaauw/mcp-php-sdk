@@ -4,47 +4,28 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Server;
 
-use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Message;
 use Maartenpaauw\Mcp\Message\Request\Parameter\RequestedSchema;
-use Override;
 
-final readonly class ElicitRequest extends BaseRequest implements Request
+#[JsonRpc\Method(Method::CreateElicitation)]
+final readonly class ElicitRequest implements Request
 {
     public function __construct(
         private Message $message,
         private RequestedSchema $requestedSchema,
     ) {}
 
-    public function getMessage(): Message
+    #[JsonRpc\Parameter]
+    public function message(): Message
     {
         return $this->message;
     }
 
-    public function getRequestedSchema(): RequestedSchema
+    #[JsonRpc\Parameter]
+    public function requestedSchema(): RequestedSchema
     {
         return $this->requestedSchema;
-    }
-
-    #[Override]
-    public function getMethod(): Method
-    {
-        return Method::CreateElicitation;
-    }
-
-    /**
-     * @return array{
-     *     message: Message,
-     *     requestedSchema: RequestedSchema,
-     * }
-     */
-    #[Override]
-    public function getParameters(): array
-    {
-        return [
-            'message' => $this->message,
-            'requestedSchema' => $this->requestedSchema,
-        ];
     }
 }

@@ -19,6 +19,11 @@ final readonly class Name implements Stringable, JsonSerializable
         }
     }
 
+    public function value(): string
+    {
+        return $this->value;
+    }
+
     #[Override]
     public function __toString(): string
     {

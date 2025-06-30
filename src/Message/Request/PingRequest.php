@@ -4,13 +4,7 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request;
 
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
-final readonly class PingRequest extends BaseRequest implements Client\Request, Server\Request
-{
-    #[Override]
-    public function getMethod(): Method
-    {
-        return Method::Ping;
-    }
-}
+#[JsonRpc\Method(Method::Ping)]
+final readonly class PingRequest implements Client\Request, Server\Request {}

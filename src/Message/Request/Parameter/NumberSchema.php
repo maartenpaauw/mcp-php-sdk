@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
 final readonly class NumberSchema implements PrimitiveSchema
 {
@@ -15,35 +15,33 @@ final readonly class NumberSchema implements PrimitiveSchema
         private ?int $maximum = null,
     ) {}
 
-    public function getTitle(): ?string
+    #[JsonRpc\Parameter]
+    public function type(): string
+    {
+        return 'number'; // TODO: It can be integer as well... Should it be two separate classes?
+    }
+
+    #[JsonRpc\Parameter]
+    public function title(): ?string
     {
         return $this->title;
     }
 
-    public function getDescription(): ?string
+    #[JsonRpc\Parameter]
+    public function description(): ?string
     {
         return $this->description;
     }
 
-    public function getMinimum(): ?int
+    #[JsonRpc\Parameter]
+    public function minimum(): ?int
     {
         return $this->minimum;
     }
 
-    public function getMaximum(): ?int
+    #[JsonRpc\Parameter]
+    public function maximum(): ?int
     {
         return $this->maximum;
-    }
-
-    #[Override]
-    public function jsonSerialize(): array
-    {
-        return array_filter(array: [
-            'type' => 'number', // TODO: It can be integer as well... Should it be two separate classes?
-            'title' => $this->title,
-            'description' => $this->description,
-            'minimum' => $this->minimum,
-            'maximum' => $this->maximum,
-        ]);
     }
 }

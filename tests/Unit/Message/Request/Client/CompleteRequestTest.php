@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Tests\Unit\Message\Request\Client;
 
 use Maartenpaauw\Mcp\Message\Request\Client\CompleteRequest;
-use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Argument;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Arguments;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Context;
@@ -47,9 +46,9 @@ final class CompleteRequestTest extends RequestTestCase
             context: $context,
         );
 
-        self::assertSame(expected: $reference, actual: $completeRequest->getReference());
-        self::assertSame(expected: $argument, actual: $completeRequest->getArgument());
-        self::assertSame(expected: $context, actual: $completeRequest->getContext());
+        self::assertSame(expected: $reference, actual: $completeRequest->reference());
+        self::assertSame(expected: $argument, actual: $completeRequest->argument());
+        self::assertSame(expected: $context, actual: $completeRequest->context());
     }
 
     #[Override]
@@ -109,108 +108,6 @@ final class CompleteRequestTest extends RequestTestCase
                             'language' => 'python',
                         ],
                     ],
-                ],
-            ],
-        ];
-    }
-
-    #[Override]
-    public static function requestMethodDataProvider(): array
-    {
-        return [
-            [
-                new CompleteRequest(
-                    reference: new PromptReference(
-                        name: new Name(value: 'code_review'),
-                    ),
-                    argument: new Argument(
-                        name: new Name(value: 'language'),
-                        value: new Value(value: 'py'),
-                    ),
-                ),
-                Method::Complete,
-            ],
-            [
-                new CompleteRequest(
-                    reference: new PromptReference(
-                        name: new Name(value: 'code_review'),
-                    ),
-                    argument: new Argument(
-                        name: new Name(value: 'framework'),
-                        value: new Value(value: 'fla'),
-                    ),
-                    context: new Context(
-                        arguments: new Arguments(
-                            new Argument(
-                                name: new Name(value: 'language'),
-                                value: new Value(value: 'python'),
-                            ),
-                        ),
-                    ),
-                ),
-                Method::Complete,
-            ],
-        ];
-    }
-
-    #[Override]
-    public static function requestParametersDataProvider(): array
-    {
-        return [
-            [
-                new CompleteRequest(
-                    reference: new PromptReference(
-                        name: new Name(value: 'code_review'),
-                    ),
-                    argument: new Argument(
-                        name: new Name(value: 'language'),
-                        value: new Value(value: 'py'),
-                    ),
-                ),
-                [
-                    'ref' => new PromptReference(
-                        name: new Name(value: 'code_review'),
-                    ),
-                    'argument' => new Argument(
-                        name: new Name(value: 'language'),
-                        value: new Value(value: 'py'),
-                    ),
-                ],
-            ],
-            [
-                new CompleteRequest(
-                    reference: new PromptReference(
-                        name: new Name(value: 'code_review'),
-                    ),
-                    argument: new Argument(
-                        name: new Name(value: 'framework'),
-                        value: new Value(value: 'fla'),
-                    ),
-                    context: new Context(
-                        arguments: new Arguments(
-                            new Argument(
-                                name: new Name(value: 'language'),
-                                value: new Value(value: 'python'),
-                            ),
-                        ),
-                    ),
-                ),
-                [
-                    'ref' => new PromptReference(
-                        name: new Name(value: 'code_review'),
-                    ),
-                    'argument' => new Argument(
-                        name: new Name(value: 'framework'),
-                        value: new Value(value: 'fla'),
-                    ),
-                    'context' => new Context(
-                        arguments: new Arguments(
-                            new Argument(
-                                name: new Name(value: 'language'),
-                                value: new Value(value: 'python'),
-                            ),
-                        ),
-                    ),
                 ],
             ],
         ];

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Tests\Unit\Message\Request\Client;
 
 use Maartenpaauw\Mcp\Message\Request\Client\GetPromptRequest;
-use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Argument;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Arguments;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
@@ -34,8 +33,8 @@ final class GetPromptRequestTest extends RequestTestCase
             arguments: $arguments,
         );
 
-        self::assertSame(expected: $name, actual: $getPromptRequest->getName());
-        self::assertSame(expected: $arguments, actual: $getPromptRequest->getArguments());
+        self::assertSame(expected: $name, actual: $getPromptRequest->name());
+        self::assertSame(expected: $arguments, actual: $getPromptRequest->arguments());
     }
 
     #[Override]
@@ -57,52 +56,6 @@ final class GetPromptRequestTest extends RequestTestCase
                     'arguments' => [
                         'code' => "def hello():\\n    print('world')",
                     ],
-                ],
-            ],
-        ];
-    }
-
-    #[Override]
-    public static function requestMethodDataProvider(): array
-    {
-        return [
-            [
-                new GetPromptRequest(
-                    name: new Name(value: 'code_review'),
-                    arguments: new Arguments(
-                        new Argument(
-                            name: new Name(value: 'code'),
-                            value: new Value(value: "def hello():\\n    print('world')"),
-                        ),
-                    ),
-                ),
-                Method::GetPrompt,
-            ],
-        ];
-    }
-
-    #[Override]
-    public static function requestParametersDataProvider(): array
-    {
-        return [
-            [
-                new GetPromptRequest(
-                    name: new Name(value: 'code_review'),
-                    arguments: new Arguments(
-                        new Argument(
-                            name: new Name(value: 'code'),
-                            value: new Value(value: "def hello():\\n    print('world')"),
-                        ),
-                    ),
-                ),
-                [
-                    'name' => new Name(value: 'code_review'),
-                    'arguments' => new Arguments(
-                        new Argument(
-                            name: new Name(value: 'code'),
-                            value: new Value(value: "def hello():\\n    print('world')"),
-                        ),
-                    ),
                 ],
             ],
         ];

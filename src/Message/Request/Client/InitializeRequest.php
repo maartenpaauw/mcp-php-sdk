@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Client;
 
-use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ClientCapabilities;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Implementation;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ProtocolVersion;
-use Override;
 
-final readonly class InitializeRequest extends BaseRequest implements Request
+#[JsonRpc\Method(Method::Initialize)]
+final readonly class InitializeRequest implements Request
 {
     public function __construct(
         private ProtocolVersion $protocolVersion,
@@ -19,41 +19,21 @@ final readonly class InitializeRequest extends BaseRequest implements Request
         private Implementation $clientInformation,
     ) {}
 
-    public function getProtocolVersion(): ProtocolVersion
+    #[JsonRpc\Parameter]
+    public function protocolVersion(): ProtocolVersion
     {
         return $this->protocolVersion;
     }
 
-    public function getClientCapabilities(): ClientCapabilities
+    #[JsonRpc\Parameter('capabilities')]
+    public function clientCapabilities(): ClientCapabilities
     {
         return $this->clientCapabilities;
     }
 
-    public function getClientInformation(): Implementation
+    #[JsonRpc\Parameter(alias: 'clientInfo')]
+    public function clientInformation(): Implementation
     {
         return $this->clientInformation;
-    }
-
-    #[Override]
-    public function getMethod(): Method
-    {
-        return Method::Initialize;
-    }
-
-    /**
-     * @return array{
-     *     protocolVersion: ProtocolVersion,
-     *     capabilities: ClientCapabilities,
-     *     clientInfo: Implementation,
-     * }
-     */
-    #[Override]
-    public function getParameters(): array
-    {
-        return [
-            'protocolVersion' => $this->protocolVersion,
-            'capabilities' => $this->clientCapabilities,
-            'clientInfo' => $this->clientInformation,
-        ];
     }
 }

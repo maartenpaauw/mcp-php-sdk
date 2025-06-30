@@ -4,38 +4,20 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Client;
 
-use Maartenpaauw\Mcp\Message\Request\BaseRequest;
+use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Uri;
-use Override;
 
-final readonly class ReadResourceRequest extends BaseRequest implements Request
+#[JsonRpc\Method(Method::ReadResource)]
+final readonly class ReadResourceRequest implements Request
 {
     public function __construct(
         private Uri $uri,
     ) {}
 
-    public function getUri(): Uri
+    #[JsonRpc\Parameter]
+    public function uri(): Uri
     {
         return $this->uri;
-    }
-
-    #[Override]
-    public function getMethod(): Method
-    {
-        return Method::ReadResource;
-    }
-
-    /**
-     * @return array{
-     *     uri: Uri,
-     * }
-     */
-    #[Override]
-    public function getParameters(): array
-    {
-        return [
-            'uri' => $this->uri,
-        ];
     }
 }

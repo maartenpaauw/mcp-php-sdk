@@ -1,0 +1,8 @@
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "resources/unsubscribe",
+    "params": {
+        "uri": "file:///project/src/main.rs"
+    }
+}

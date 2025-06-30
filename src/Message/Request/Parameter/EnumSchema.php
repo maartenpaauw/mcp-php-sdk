@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use InvalidArgumentException;
-use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
 final readonly class EnumSchema implements PrimitiveSchema
 {
@@ -40,25 +40,33 @@ final readonly class EnumSchema implements PrimitiveSchema
         }
     }
 
-    public function getTitle(): ?string
+    #[JsonRpc\Parameter]
+    public function type(): string
+    {
+        return 'string';
+    }
+
+    #[JsonRpc\Parameter]
+    public function title(): ?string
     {
         return $this->title;
     }
 
-    public function getDescription(): ?string
+    #[JsonRpc\Parameter]
+    public function description(): ?string
     {
         return $this->description;
     }
 
-    #[Override]
-    public function jsonSerialize(): array
+    #[JsonRpc\Parameter]
+    public function enum(): array
     {
-        return array_filter(array: [
-            'type' => 'string',
-            'title' => $this->title,
-            'description' => $this->description,
-            'enum' => $this->enum,
-            'enumNames' => $this->enumNames,
-        ]);
+        return $this->enum;
+    }
+
+    #[JsonRpc\Parameter]
+    public function enumNames(): ?array
+    {
+        return $this->enumNames;
     }
 }

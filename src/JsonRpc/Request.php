@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\JsonRpc;
 
 use Override;
+use ReflectionException;
 
 final readonly class Request implements Message
 {
@@ -14,36 +15,34 @@ final readonly class Request implements Message
         private \Maartenpaauw\Mcp\Message\Request\Request $request,
     ) {}
 
-    public function getVersion(): Version
+    public function version(): Version
     {
         return $this->version;
     }
 
-    public function getIdentifier(): RequestIdentifier
+    public function identifier(): RequestIdentifier
     {
         return $this->identifier;
     }
 
-    public function getRequest(): \Maartenpaauw\Mcp\Message\Request\Request
+    public function request(): \Maartenpaauw\Mcp\Message\Request\Request
     {
         return $this->request;
     }
 
+    /**
+     * @throws ReflectionException
+     */
     #[Override]
     public function jsonSerialize(): array
     {
-        $data = [
+        $requestReflector = new RequestReflector();
+
+        return [
             'jsonrpc' => $this->version,
             'id' => $this->identifier,
-            'method' => $this->request->getMethod(),
+            'method' => $requestReflector->method(request: $this->request),
+            'params' => (object) $requestReflector->parameters(subject: $this->request),
         ];
-
-        $parameters = $this->request->getParameters();
-
-        if ($parameters !== []) {
-            $data['params'] = $parameters;
-        }
-
-        return $data;
     }
 }

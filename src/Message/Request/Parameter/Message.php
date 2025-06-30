@@ -9,7 +9,7 @@ use JsonSerializable;
 use Override;
 use Stringable;
 
-final readonly class Message implements JsonSerializable, Stringable
+final readonly class Message implements Stringable, JsonSerializable
 {
     public function __construct(
         private string $value,
