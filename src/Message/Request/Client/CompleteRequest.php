@@ -46,7 +46,7 @@ final readonly class CompleteRequest extends BaseRequest implements Request
      * @return array{
      *     ref: PromptReference | ResourceTemplateReference,
      *     argument: Argument,
-     *     context?: Context
+     *     context?: Context,
      * }
      */
     #[Override]

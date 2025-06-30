@@ -51,7 +51,7 @@ final readonly class CallToolRequest extends BaseRequest implements Request
     /**
      * @return array{
      *     name: Name,
-     *     arguments?: array<string, mixed>
+     *     arguments?: array<string, mixed>,
      * }
      */
     #[Override]
