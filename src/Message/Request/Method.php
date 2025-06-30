@@ -9,7 +9,7 @@ enum Method: string
     case CallTool = 'tools/call';
     case Complete = 'completion/complete';
     case CreateElicitation = 'elicitation/create';
-    case GetPrompts = 'prompts/get';
+    case GetPrompt = 'prompts/get';
     case Initialize = 'initialize';
     case ListPrompts = 'prompts/list';
     case ListResourceTemplates = 'resources/templates/list';

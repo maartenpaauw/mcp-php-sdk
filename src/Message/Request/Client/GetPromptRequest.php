@@ -31,7 +31,7 @@ final readonly class GetPromptRequest extends BaseRequest implements Request
     #[Override]
     public function getMethod(): Method
     {
-        return Method::GetPrompts;
+        return Method::GetPrompt;
     }
 
     /**
