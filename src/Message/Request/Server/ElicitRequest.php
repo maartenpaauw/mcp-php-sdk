@@ -8,7 +8,6 @@ use Maartenpaauw\Mcp\Message\Request\BaseRequest;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Message;
 use Maartenpaauw\Mcp\Message\Request\Parameter\RequestedSchema;
-use Maartenpaauw\Mcp\Message\Request\ParameterFilter;
 use Override;
 
 final readonly class ElicitRequest extends BaseRequest implements Request
