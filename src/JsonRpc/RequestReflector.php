@@ -6,6 +6,7 @@ namespace Maartenpaauw\Mcp\JsonRpc;
 
 use LogicException;
 use Maartenpaauw\Mcp\Message\Request;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Arguments;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Parameter as RequestParameter;
 use ReflectionClass;
 use ReflectionException;
@@ -60,7 +61,7 @@ final readonly class RequestReflector
 
                 $value = $reflectionMethod->invoke(object: $subject);
 
-                if ($instance->mapper === ArgumentsMapper::class) {
+                if ($instance->mapper === ArgumentsMapper::class && $value instanceof Arguments) {
                     $value = new ArgumentsMapper()(arguments: $value);
                 } elseif ($value instanceof RequestParameter) {
                     $value = $this->parameters(subject: $value);

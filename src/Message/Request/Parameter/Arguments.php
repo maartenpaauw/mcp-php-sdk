@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
+use Maartenpaauw\Mcp\JsonRpc;
+
 final readonly class Arguments implements Parameter
 {
     private array $arguments;
@@ -15,7 +17,8 @@ final readonly class Arguments implements Parameter
         $this->arguments = $arguments;
     }
 
-    public function all(): array
+    #[JsonRpc\Parameter(alias: 'arguments')]
+    public function toArray(): array
     {
         return $this->arguments;
     }

@@ -20,11 +20,11 @@ final readonly class ArgumentsMapper
         return array_combine(
             keys: array_map(
                 callback: static fn (Argument $argument): string => (string) $argument->name(),
-                array: $arguments->all(),
+                array: $arguments->toArray(),
             ),
             values: array_map(
                 callback: static fn (Argument $argument): string => (string) $argument->value(),
-                array: $arguments->all(),
+                array: $arguments->toArray(),
             ),
         );
     }
