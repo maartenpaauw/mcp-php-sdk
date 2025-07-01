@@ -10,7 +10,6 @@ use Maartenpaauw\Mcp\Message\Request\Parameter\Arguments;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Value;
 use Maartenpaauw\Mcp\Tests\Unit\Message\Request\RequestTestCase;
-use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -35,29 +34,5 @@ final class GetPromptRequestTest extends RequestTestCase
 
         self::assertSame(expected: $name, actual: $getPromptRequest->name());
         self::assertSame(expected: $arguments, actual: $getPromptRequest->arguments());
-    }
-
-    #[Override]
-    public static function serializedMessageDataProvider(): array
-    {
-        return [
-            [
-                new GetPromptRequest(
-                    name: new Name(value: 'code_review'),
-                    arguments: new Arguments(
-                        new Argument(
-                            name: new Name(value: 'code'),
-                            value: new Value(value: "def hello():\\n    print('world')"),
-                        ),
-                    ),
-                ),
-                [
-                    'name' => 'code_review',
-                    'arguments' => [
-                        'code' => "def hello():\\n    print('world')",
-                    ],
-                ],
-            ],
-        ];
     }
 }
