@@ -30,6 +30,7 @@ class RequestTestCase extends TestCase
         return [
             ['call_tool_request.php', 'call_tool_request.json'],
             ['call_tool_request_with_arguments.php', 'call_tool_request_with_arguments.json'],
+            ['complete_request.php', 'complete_request.json'],
             ['list_prompts_request.php', 'list_prompts_request.json'],
             ['list_prompts_with_cursor_request.php', 'list_prompts_with_cursor_request.json'],
             ['list_resource_templates_request.php', 'list_resource_templates_request.json'],
