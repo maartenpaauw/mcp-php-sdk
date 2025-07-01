@@ -52,20 +52,21 @@ final readonly class RequestReflector
             $attributes = $reflectionMethod->getAttributes(name: Parameter::class);
 
             foreach ($attributes as $attribute) {
-                /** @var Parameter $instance */
                 $instance = $attribute->newInstance();
+
+                if ($instance instanceof Parameter === false) {
+                    throw new LogicException();
+                }
 
                 $value = $reflectionMethod->invoke(object: $subject);
 
-                if ($value instanceof RequestParameter) {
+                if ($instance->mapper === ArgumentsMapper::class) {
+                    $value = new ArgumentsMapper()(arguments: $value);
+                } elseif ($value instanceof RequestParameter) {
                     $value = $this->parameters(subject: $value);
-                }
-
-                if ($value === null) {
+                } elseif ($value === null) {
                     continue;
-                }
-
-                if ($value === []) {
+                } elseif ($value === []) {
                     $value = new stdClass();
                 }
 

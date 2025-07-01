@@ -12,7 +12,11 @@ use Attribute;
 #[Attribute(Attribute::TARGET_METHOD)]
 final readonly class Parameter
 {
+    /**
+     * @param class-string<ArgumentsMapper>|null $mapper
+     */
     public function __construct(
         public ?string $alias = null,
+        public ?string $mapper = null,
     ) {}
 }

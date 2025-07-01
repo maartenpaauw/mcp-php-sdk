@@ -14,4 +14,9 @@ final readonly class Arguments implements Parameter
     {
         $this->arguments = $arguments;
     }
+
+    public function all(): array
+    {
+        return $this->arguments;
+    }
 }
