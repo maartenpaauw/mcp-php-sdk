@@ -19,8 +19,7 @@ final readonly class CallToolRequest implements Request
     public function __construct(
         private Name $name,
         private ?array $arguments = null,
-    )
-    {
+    ) {
         foreach ($this->arguments ?? [] as $argumentName => $argument) {
             if (is_string(value: $argumentName) === false) {
                 throw new InvalidArgumentException(message: 'Argument name must be a string');
