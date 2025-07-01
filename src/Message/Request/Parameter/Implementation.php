@@ -10,15 +10,11 @@ use Maartenpaauw\Mcp\JsonRpc;
 final readonly class Implementation implements Parameter
 {
     public function __construct(
-        private string $name,
+        private Name $name,
         private string $version,
         private ?string $title = null,
     )
     {
-        if ($this->name === '') {
-            throw new InvalidArgumentException(message: 'Name cannot be empty');
-        }
-
         if ($this->version === '') {
             throw new InvalidArgumentException(message: 'Version cannot be empty');
         }
@@ -29,7 +25,7 @@ final readonly class Implementation implements Parameter
     }
 
     #[JsonRpc\Parameter]
-    public function name(): string
+    public function name(): Name
     {
         return $this->name;
     }

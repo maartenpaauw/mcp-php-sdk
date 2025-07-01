@@ -63,11 +63,17 @@ final readonly class RequestReflector
 
                 if ($instance->mapper === ArgumentsMapper::class && $value instanceof Arguments) {
                     $value = new ArgumentsMapper()(arguments: $value);
-                } elseif ($value instanceof RequestParameter) {
+                }
+
+                if ($value instanceof RequestParameter) {
                     $value = $this->parameters(subject: $value);
-                } elseif ($value === null) {
+                }
+
+                if ($value === null) {
                     continue;
-                } elseif ($value === []) {
+                }
+
+                if ($value === []) {
                     $value = new stdClass();
                 }
 
