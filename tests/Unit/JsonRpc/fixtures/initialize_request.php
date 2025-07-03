@@ -6,6 +6,7 @@ use Maartenpaauw\Mcp\JsonRpc\Request;
 use Maartenpaauw\Mcp\JsonRpc\RequestIdentifier;
 use Maartenpaauw\Mcp\JsonRpc\Version;
 use Maartenpaauw\Mcp\Message\Request\Client\InitializeRequest;
+use Maartenpaauw\Mcp\Message\Request\Parameter;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ClientCapabilities;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ClientRootsCapability;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ClientSamplingCapability;
@@ -26,7 +27,7 @@ return new Request(
         ),
         clientInformation: new Implementation(
             name: new Name(value: 'ExampleClient'),
-            version: '1.0.0',
+            version: new Parameter\Version(value: '1.0.0'),
         ),
     ),
 );

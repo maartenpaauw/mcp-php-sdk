@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\JsonRpc;
 
+use Iterator;
 use LogicException;
 use Maartenpaauw\Mcp\Message\Request;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Arguments;
@@ -60,6 +61,13 @@ final readonly class RequestReflector
                 }
 
                 $value = $reflectionMethod->invoke(object: $subject);
+
+                if ($value instanceof Iterator) {
+                    $value = array_map(
+                        callback: fn (mixed $item): mixed => $item instanceof RequestParameter ? $this->parameters(subject: $item) : $item,
+                        array: iterator_to_array(iterator: $value),
+                    );
+                }
 
                 if ($instance->mapper === ArgumentsMapper::class && $value instanceof Arguments) {
                     $value = new ArgumentsMapper()(arguments: $value);

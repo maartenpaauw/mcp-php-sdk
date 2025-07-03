@@ -4,45 +4,36 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
-use InvalidArgumentException;
 use LogicException;
 use Maartenpaauw\Mcp\JsonRpc;
 
 final readonly class StringSchema implements PrimitiveSchema
 {
     public function __construct(
-        private ?string $title = null,
-        private ?string $description = null,
+        private ?Title $title = null,
+        private ?Description $description = null,
         private ?int $minLength = null,
         private ?int $maxLength = null,
         private ?StringSchemaFormat $format = null,
     ) {
-        if ($this->title === '') {
-            throw new InvalidArgumentException(message: 'Title cannot be empty');
-        }
-
-        if ($this->description === '') {
-            throw new InvalidArgumentException(message: 'Description cannot be empty');
-        }
-
         if ($this->maxLength < $this->minLength) {
             throw new LogicException(message: "Min length [$this->minLength] must be lesser than max length [$this->maxLength]");
         }
     }
 
-    public function type(): string
+    public function type(): Type
     {
-        return 'string';
+        return new Type(value: 'string');
     }
 
     #[JsonRpc\Parameter]
-    public function title(): ?string
+    public function title(): ?Title
     {
         return $this->title;
     }
 
     #[JsonRpc\Parameter]
-    public function description(): ?string
+    public function description(): ?Description
     {
         return $this->description;
     }

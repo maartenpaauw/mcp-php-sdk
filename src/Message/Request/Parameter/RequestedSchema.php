@@ -45,9 +45,9 @@ final readonly class RequestedSchema implements Parameter
     }
 
     #[JsonRpc\Parameter]
-    public function type(): string
+    public function type(): Type
     {
-        return 'object';
+        return new Type(value: 'object');
     }
 
     #[JsonRpc\Parameter]

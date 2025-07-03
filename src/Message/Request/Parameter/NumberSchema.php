@@ -9,26 +9,26 @@ use Maartenpaauw\Mcp\JsonRpc;
 final readonly class NumberSchema implements PrimitiveSchema
 {
     public function __construct(
-        private ?string $title = null,
-        private ?string $description = null,
+        private ?Title $title = null,
+        private ?Description $description = null,
         private ?int $minimum = null,
         private ?int $maximum = null,
     ) {}
 
     #[JsonRpc\Parameter]
-    public function type(): string
+    public function type(): Type
     {
-        return 'number'; // TODO: It can be integer as well... Should it be two separate classes?
+        return new Type(value: 'number'); // TODO: It can be integer as well... Should it be two separate classes?
     }
 
     #[JsonRpc\Parameter]
-    public function title(): ?string
+    public function title(): ?Title
     {
         return $this->title;
     }
 
     #[JsonRpc\Parameter]
-    public function description(): ?string
+    public function description(): ?Description
     {
         return $this->description;
     }

@@ -13,9 +13,9 @@ final readonly class ResourceTemplateReference implements Parameter
     ) {}
 
     #[JsonRpc\Parameter]
-    public function type(): string
+    public function type(): Type
     {
-        return 'ref/resource';
+        return new Type(value: 'ref/resource');
     }
 
     #[JsonRpc\Parameter]

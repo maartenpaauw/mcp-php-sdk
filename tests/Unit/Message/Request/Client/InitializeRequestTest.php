@@ -11,6 +11,7 @@ use Maartenpaauw\Mcp\Message\Request\Parameter\ClientSamplingCapability;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Implementation;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ProtocolVersion;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Version;
 use Maartenpaauw\Mcp\Tests\Unit\Message\Request\RequestTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\Test;
@@ -32,7 +33,7 @@ final class InitializeRequestTest extends RequestTestCase
 
         $clientInformation = new Implementation(
             name: new Name(value: 'ExampleClient'),
-            version: '1.0.0',
+            version: new Version(value: '1.0.0'),
         );
 
         $initializeRequest = new InitializeRequest(

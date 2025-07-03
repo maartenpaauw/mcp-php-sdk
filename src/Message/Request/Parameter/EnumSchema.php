@@ -11,8 +11,8 @@ final readonly class EnumSchema implements PrimitiveSchema
 {
     public function __construct(
         private array $enum,
-        private ?string $title = null,
-        private ?string $description = null,
+        private ?Title $title = null,
+        private ?Description $description = null,
         private ?array $enumNames = null,
     ) {
         if ($this->enum === []) {
@@ -30,38 +30,30 @@ final readonly class EnumSchema implements PrimitiveSchema
                 throw new InvalidArgumentException(message: 'Enum name must be a string');
             }
         }
-
-        if ($this->title === '') {
-            throw new InvalidArgumentException(message: 'Title cannot be empty');
-        }
-
-        if ($this->description === '') {
-            throw new InvalidArgumentException(message: 'Description cannot be empty');
-        }
     }
 
     #[JsonRpc\Parameter]
-    public function type(): string
+    public function type(): Type
     {
-        return 'string';
-    }
-
-    #[JsonRpc\Parameter]
-    public function title(): ?string
-    {
-        return $this->title;
-    }
-
-    #[JsonRpc\Parameter]
-    public function description(): ?string
-    {
-        return $this->description;
+        return new Type(value: 'string');
     }
 
     #[JsonRpc\Parameter]
     public function enum(): array
     {
         return $this->enum;
+    }
+
+    #[JsonRpc\Parameter]
+    public function title(): ?Title
+    {
+        return $this->title;
+    }
+
+    #[JsonRpc\Parameter]
+    public function description(): ?Description
+    {
+        return $this->description;
     }
 
     #[JsonRpc\Parameter]

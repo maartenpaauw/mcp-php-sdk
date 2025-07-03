@@ -14,9 +14,9 @@ final readonly class PromptReference implements Parameter
     ) {}
 
     #[JsonRpc\Parameter]
-    public function type(): string
+    public function type(): Type
     {
-        return 'ref/prompt';
+        return new Type(value: 'ref/prompt');
     }
 
     #[JsonRpc\Parameter]
