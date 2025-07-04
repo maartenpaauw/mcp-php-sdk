@@ -63,15 +63,38 @@ final readonly class RequestReflector
                 $value = $reflectionMethod->invoke(object: $subject);
 
                 if ($value instanceof Iterator) {
-                    $value = array_map(
-                        callback: fn (mixed $item): mixed => $item instanceof RequestParameter ? $this->parameters(subject: $item) : $item,
-                        array: iterator_to_array(iterator: $value),
-                    );
+                    $iteratorReflectionClass = new ReflectionClass(objectOrClass: $value);
+                    $mapByAttribute = $iteratorReflectionClass->getAttributes(name: MapBy::class)[0] ?? null;
+
+                    if ($mapByAttribute !== null) {
+                        $mapBy = $mapByAttribute->newInstance();
+
+                        if ($mapBy instanceof MapBy === false) {
+                            throw new LogicException();
+                        }
+
+                        $array = [];
+
+                        foreach ($value as $item) {
+                            if ($item instanceof $mapBy->key[0] === false || $item instanceof $mapBy->value[0] === false) {
+                                throw new LogicException();
+                            }
+
+                            $key = call_user_func(callback: [$item, $mapBy->key[1]]);
+                            $value = call_user_func(callback: [$item, $mapBy->value[1]]);
+
+                            $array[(string) $key] = $value;
+                        }
+
+                        $value = $array;
+                    } else {
+                        $value = array_map(
+                            callback: fn (mixed $item): mixed => $item instanceof RequestParameter ? $this->parameters(subject: $item) : $item,
+                            array: iterator_to_array(iterator: $value),
+                        );
+                    }
                 }
 
-                if ($instance->mapper === ArgumentsMapper::class && $value instanceof Arguments) {
-                    $value = new ArgumentsMapper()(arguments: $value);
-                }
 
                 if ($value instanceof RequestParameter) {
                     $value = $this->parameters(subject: $value);

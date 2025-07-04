@@ -1,0 +1,118 @@
+{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "sampling/createMessage",
+    "params": {
+        "_meta": {
+            "progressToken": "progress-token-abc123",
+            "timestamp": "2025-07-04T10:30:00+00:00",
+            "requestId": "internal-req-789",
+            "clientVersion": "1.0.0"
+        },
+        "messages": [
+            {
+                "role": "user",
+                "content": {
+                    "type": "text",
+                    "text": "Please analyze this image and provide insights about the data trends shown.",
+                    "annotations": {
+                        "audience": ["assistant"],
+                        "priority": 0.9,
+                        "lastModified": "2025-07-04T10:29:45+00:00"
+                    },
+                    "_meta": {
+                        "messageId": "msg-001",
+                        "source": "user-input"
+                    }
+                }
+            },
+            {
+                "role": "user",
+                "content": {
+                    "type": "image",
+                    "data": "ZXhhbXBsZV9pbWFnZV9iYXNlNjQ=",
+                    "mimeType": "image/png",
+                    "annotations": {
+                        "audience": ["assistant"],
+                        "priority": 1.0,
+                        "lastModified": "2025-07-04T10:29:50+00:00"
+                    },
+                    "_meta": {
+                        "filename": "chart.png",
+                        "size": 1024,
+                        "uploadTime": "2025-07-04T10:29:50+00:00"
+                    }
+                }
+            },
+            {
+                "role": "user",
+                "content": {
+                    "type": "audio",
+                    "data": "ZXhhbXBsZV9hdWRpb19iYXNlNjQ=",
+                    "mimeType": "audio/wav",
+                    "annotations": {
+                        "audience": ["assistant"],
+                        "priority": 0.7,
+                        "lastModified": "2025-07-04T10:30:00+00:00"
+                    },
+                    "_meta": {
+                        "duration": 5.2,
+                        "sampleRate": 44100,
+                        "channels": 2
+                    }
+                }
+            },
+            {
+                "role": "assistant",
+                "content": {
+                    "type": "text",
+                    "text": "I can see the chart shows an upward trend in sales data over the past quarter. The audio confirms your question about seasonal patterns.",
+                    "annotations": {
+                        "audience": ["user"],
+                        "priority": 0.8,
+                        "lastModified": "2025-07-04T10:29:55+00:00"
+                    },
+                    "_meta": {
+                        "generatedBy": "claude-3-5-sonnet",
+                        "confidence": 0.95
+                    }
+                }
+            }
+        ],
+        "modelPreferences": {
+            "hints": [
+                {
+                    "name": "claude-3-5-sonnet"
+                },
+                {
+                    "name": "gpt-4"
+                }
+            ],
+            "costPriority": 0.3,
+            "speedPriority": 0.7,
+            "intelligencePriority": 0.9
+        },
+        "systemPrompt": "You are a data analysis expert with deep knowledge of statistical trends, visualization interpretation, and business intelligence. When analyzing charts or data, provide detailed insights about patterns, anomalies, and actionable recommendations. Always consider seasonal factors, market context, and statistical significance in your analysis.",
+        "includeContext": "allServers",
+        "temperature": 0.7,
+        "maxTokens": 2048,
+        "stopSequences": [
+            "Human:",
+            "User:",
+            "END_ANALYSIS"
+        ],
+        "metadata": {
+            "provider": "anthropic",
+            "model_version": 20241022,
+            "request_source": "dashboard",
+            "user_id": "user-12345",
+            "session_id": "sess-67890",
+            "billing_tier": "premium",
+            "custom_parameters": {
+                "analysis_depth": "comprehensive",
+                "output_format": "structured",
+                "include_citations": true
+            }
+        }
+    }
+}

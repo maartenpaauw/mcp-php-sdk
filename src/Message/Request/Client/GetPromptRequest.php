@@ -23,7 +23,7 @@ final readonly class GetPromptRequest implements Request
         return $this->name;
     }
 
-    #[JsonRpc\Parameter(mapper: JsonRpc\ArgumentsMapper::class)]
+    #[JsonRpc\Parameter]
     public function arguments(): ?Arguments
     {
         return $this->arguments;

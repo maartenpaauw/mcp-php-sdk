@@ -12,7 +12,7 @@ final readonly class Context implements Parameter
         private ?Arguments $arguments = null,
     ) {}
 
-    #[JsonRpc\Parameter(mapper: JsonRpc\ArgumentsMapper::class)]
+    #[JsonRpc\Parameter]
     public function arguments(): ?Arguments
     {
         return $this->arguments;

@@ -6,11 +6,13 @@ namespace Maartenpaauw\Mcp\Message\Request\Parameter\Metadata;
 
 use ArrayIterator;
 use Iterator;
+use Maartenpaauw\Mcp\JsonRpc\MapBy;
 use Override;
 
 /**
  * @implements Iterator<int, Entry>
  */
+#[MapBy(key: [Entry::class, 'key'], value: [Entry::class, 'value'])]
 final readonly class Metadata implements Iterator
 {
     private ArrayIterator $entries;

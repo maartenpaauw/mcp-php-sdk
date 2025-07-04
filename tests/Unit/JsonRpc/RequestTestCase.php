@@ -28,13 +28,14 @@ class RequestTestCase extends TestCase
     public static function fixtureDataProvider(): array
     {
         return [
-            ['create_message_request.php', 'create_message_request.json'],
             ['call_tool_request.php', 'call_tool_request.json'],
             ['call_tool_request_with_arguments.php', 'call_tool_request_with_arguments.json'],
             ['complete_prompt_request.php', 'complete_prompt_request.json'],
             ['complete_prompt_with_context_request.php', 'complete_prompt_with_context_request.json'],
             ['complete_resource_request.php', 'complete_resource_request.json'],
             ['complete_resource_with_context_request.php', 'complete_resource_with_context_request.json'],
+            ['create_message_extended_request.php', 'create_message_extended_request.json'],
+            ['create_message_request.php', 'create_message_request.json'],
             ['get_prompt_request.php', 'get_prompt_request.json'],
             ['get_prompt_with_arguments_request.php', 'get_prompt_with_arguments_request.json'],
             ['initialize_request.php', 'initialize_request.json'],
