@@ -73,7 +73,7 @@ final readonly class CreateMessageRequest implements Request
     }
 
     #[JsonRpc\Parameter]
-    public function metadata(): ?Meta
+    public function metadata(): ?Metadata
     {
         return $this->metadata;
     }
