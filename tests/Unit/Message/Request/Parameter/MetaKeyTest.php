@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Tests\Unit\Message\Parameter;
+namespace Maartenpaauw\Mcp\Tests\Unit\Message\Request\Parameter;
 
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Key;
