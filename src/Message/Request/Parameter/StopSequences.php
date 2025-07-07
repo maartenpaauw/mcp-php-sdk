@@ -13,12 +13,15 @@ use Override;
  */
 final readonly class StopSequences implements Iterator
 {
+    /**
+     * @var ArrayIterator<int, StopSequence>
+     */
     private ArrayIterator $stopSequences;
 
     public function __construct(
         StopSequence ...$stopSequences,
     ) {
-        $this->stopSequences = new ArrayIterator(array: $stopSequences);
+        $this->stopSequences = new ArrayIterator(array: array_values(array: $stopSequences));
     }
 
     #[Override]

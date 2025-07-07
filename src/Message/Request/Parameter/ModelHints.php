@@ -8,14 +8,20 @@ use ArrayIterator;
 use Iterator;
 use Override;
 
+/**
+ * @implements Iterator<int, ModelHint>
+ */
 final readonly class ModelHints implements Iterator
 {
+    /**
+     * @var ArrayIterator<int, ModelHint>
+     */
     private ArrayIterator $modelHints;
 
     public function __construct(
         ModelHint ...$modelHints,
     ) {
-        $this->modelHints = new ArrayIterator(array: $modelHints);
+        $this->modelHints = new ArrayIterator(array: array_values(array: $modelHints));
     }
 
     #[Override]

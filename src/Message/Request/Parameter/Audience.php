@@ -13,11 +13,14 @@ use Override;
  */
 final readonly class Audience implements Iterator
 {
+    /**
+     * @var ArrayIterator<int, Role>
+     */
     private ArrayIterator $roles;
 
     public function __construct(Role ...$roles)
     {
-        $this->roles = new ArrayIterator(array: $roles);
+        $this->roles = new ArrayIterator(array: array_values(array: $roles));
     }
 
     #[Override]

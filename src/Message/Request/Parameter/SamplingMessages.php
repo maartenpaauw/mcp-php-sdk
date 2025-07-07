@@ -13,12 +13,15 @@ use Override;
  */
 final readonly class SamplingMessages implements Iterator
 {
+    /**
+     * @var ArrayIterator<int, SamplingMessage>
+     */
     private ArrayIterator $samplingMessages;
 
     public function __construct(
         SamplingMessage ...$samplingMessages,
     ) {
-        $this->samplingMessages = new ArrayIterator(array: $samplingMessages);
+        $this->samplingMessages = new ArrayIterator(array: array_values(array: $samplingMessages));
     }
 
     #[Override]

@@ -9,16 +9,22 @@ use Iterator;
 use Maartenpaauw\Mcp\JsonRpc;
 use Override;
 
+/**
+ * @implements Iterator<int, Argument>
+ */
 #[JsonRpc\MapBy(key: [Argument::class, 'name'], value: [Argument::class, 'value'])]
 final readonly class Arguments implements Iterator
 {
+    /**
+     * @var ArrayIterator<int, Argument>
+     */
     private ArrayIterator $arguments;
 
     public function __construct(
         Argument ...$arguments,
     )
     {
-        $this->arguments = new ArrayIterator(array: $arguments);
+        $this->arguments = new ArrayIterator(array: array_values(array: $arguments));
     }
 
     #[Override]
