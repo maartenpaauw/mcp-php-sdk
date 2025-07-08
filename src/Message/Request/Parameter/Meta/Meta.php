@@ -4,90 +4,58 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request\Parameter\Meta;
 
-use AppendIterator;
 use ArrayIterator;
 use Iterator;
-use Maartenpaauw\Mcp\JsonRpc\MapBy;
-use Maartenpaauw\Mcp\Message\Request\Parameter\ProgressToken;
 use Override;
+use Maartenpaauw\Mcp\JsonRpc;
 
 /**
  * @implements Iterator<int, Entry>
  */
-#[MapBy(
-    key: [
-        ProgressToken::class => 'progressToken',
-        Entry::class => [Entry::class, 'key'],
-    ],
-    value: [
-        ProgressToken::class => [ProgressToken::class, 'value'],
-        Entry::class => [Entry::class, 'value'],
-    ],
+#[JsonRpc\MapBy(
+    key: [Entry::class => [Entry::class, 'key']],
+    value: [Entry::class => [Entry::class, 'value']],
 )]
 final readonly class Meta implements Iterator
 {
-    private ?ProgressToken $progressToken;
-
     /**
-     * @var Iterator<int, ProgressToken | Entry>
+     * @var ArrayIterator<int, Entry>
      */
-    private Iterator $iterator;
+    private ArrayIterator $entries;
 
     public function __construct(
-        null | ProgressToken | Entries $progressToken = null,
-        private ?Entries $entries = null,
-    )
-    {
-        $all = new AppendIterator();
-        $all->append(iterator: $entries);
-
-        if ($progressToken instanceof ProgressToken) {
-            $this->progressToken = $progressToken;
-            $all->append(iterator: new ArrayIterator(array: [$progressToken]));
-        } else {
-            $this->progressToken = null;
-        }
-
-        $this->iterator = $all;
-    }
-
-    public function progressToken(): ?ProgressToken
-    {
-        return $this->progressToken;
-    }
-
-    public function entries(): Entries
-    {
-        return $this->entries;
+        Entry ...$entries,
+    ) {
+        $this->entries = new ArrayIterator(array: $entries);
     }
 
     #[Override]
-    public function current(): ProgressToken | Entry
+    public function current(): Entry
     {
-        return $this->iterator->current();
+        return $this->entries->current();
     }
 
     #[Override]
     public function next(): void
     {
-        $this->iterator->next();
+        $this->entries->next();
     }
 
     #[Override]
     public function key(): int
     {
-        return $this->iterator->key();
+        return $this->entries->key();
     }
 
     #[Override]
     public function valid(): bool
     {
-        return $this->iterator->valid();
+        return $this->entries->valid();
     }
 
     #[Override]
     public function rewind(): void
     {
-        $this->iterator->rewind();
+        $this->entries->rewind();
     }
 }

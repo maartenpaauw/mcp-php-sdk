@@ -7,7 +7,7 @@ namespace Maartenpaauw\Mcp\Message\Request\Client;
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
-use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\MetaWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 
 #[JsonRpc\Method(Method::CallTool)]
@@ -20,7 +20,7 @@ final readonly class CallToolRequest implements Request
     public function __construct(
         private Name $name,
         private ?array $arguments = null,
-        private ?Meta $meta = null,
+        private ?MetaWithProgressToken $meta = null,
     ) {
         foreach ($this->arguments ?? [] as $argumentName => $argument) {
             if (is_string(value: $argumentName) === false) {
@@ -45,7 +45,7 @@ final readonly class CallToolRequest implements Request
     }
 
     #[JsonRpc\Parameter(alias: '_meta')]
-    public function meta(): ?Meta
+    public function meta(): ?MetaWithProgressToken
     {
         return $this->meta;
     }

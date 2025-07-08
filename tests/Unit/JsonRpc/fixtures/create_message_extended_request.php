@@ -15,6 +15,10 @@ use Maartenpaauw\Mcp\Message\Request\Parameter\ImageContent;
 use Maartenpaauw\Mcp\Message\Request\Parameter\IncludeContext;
 use Maartenpaauw\Mcp\Message\Request\Parameter\LastModified;
 use Maartenpaauw\Mcp\Message\Request\Parameter\MaxTokens;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Entry;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Key;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\MetaWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Metadata;
 use Maartenpaauw\Mcp\Message\Request\Parameter\MimeType;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ModelHint;
@@ -22,6 +26,7 @@ use Maartenpaauw\Mcp\Message\Request\Parameter\ModelHints;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ModelPreferences;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Priority;
+use Maartenpaauw\Mcp\Message\Request\Parameter\ProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Role;
 use Maartenpaauw\Mcp\Message\Request\Parameter\SamplingMessage;
 use Maartenpaauw\Mcp\Message\Request\Parameter\SamplingMessages;
@@ -47,6 +52,16 @@ return new Request(
                         priority: new Priority(value: 0.9),
                         lastModified: new LastModified(timestamp: new DateTimeImmutable(datetime: '2025-07-04T10:29:45Z')),
                     ),
+                    meta: new Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta(
+                        new Entry(
+                            key: new Key(value: 'messageId'),
+                            value: new Unknown(value: 'msg-001'),
+                        ),
+                        new Entry(
+                            key: new Key(value: 'source'),
+                            value: new Unknown(value: 'user-input'),
+                        ),
+                    ),
                 ),
             ),
             new SamplingMessage(
@@ -59,6 +74,20 @@ return new Request(
                         priority: new Priority(value: 1.0),
                         lastModified: new LastModified(timestamp: new DateTimeImmutable(datetime: '2025-07-04T10:29:50Z')),
                     ),
+                    meta: new Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta(
+                        new Entry(
+                            key: new Key(value: 'filename'),
+                            value: new Unknown(value: 'chart.png'),
+                        ),
+                        new Entry(
+                            key: new Key(value: 'size'),
+                            value: new Unknown(value: 1_024),
+                        ),
+                        new Entry(
+                            key: new Key(value: 'uploadTime'),
+                            value: new Unknown(value: '2025-07-04T10:29:50+00:00'),
+                        ),
+                    ),
                 ),
             ),
             new SamplingMessage(
@@ -70,7 +99,21 @@ return new Request(
                         audience: new Audience(Role::Assistant),
                         priority: new Priority(value: 0.7),
                         lastModified: new LastModified(timestamp: new DateTimeImmutable(datetime: '2025-07-04T10:30:00Z')),
-                    )
+                    ),
+                    meta: new Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta(
+                        new Entry(
+                            key: new Key(value: 'channels'),
+                            value: new Unknown(value: 2),
+                        ),
+                        new Entry(
+                            key: new Key(value: 'duration'),
+                            value: new Unknown(value: 5.2),
+                        ),
+                        new Entry(
+                            key: new Key(value: 'sampleRate'),
+                            value: new Unknown(value: 44_100),
+                        ),
+                    ),
                 ),
             ),
             new SamplingMessage(
@@ -81,7 +124,17 @@ return new Request(
                         audience: new Audience(Role::User),
                         priority: new Priority(value: 0.8),
                         lastModified: new LastModified(timestamp: new DateTimeImmutable(datetime: '2025-07-04T10:29:55Z')),
-                    )
+                    ),
+                    meta: new Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta(
+                        new Entry(
+                            key: new Key(value: 'confidence'),
+                            value: new Unknown(value: 0.95),
+                        ),
+                        new Entry(
+                            key: new Key(value: 'generatedBy'),
+                            value: new Unknown(value: 'claude-3-5-sonnet'),
+                        ),
+                    ),
                 ),
             )
         ),
@@ -139,6 +192,23 @@ return new Request(
                     'output_format' => 'structured',
                     'include_citations' => true,
                 ]),
+            )
+        ),
+        meta: new MetaWithProgressToken(
+            progressToken: new ProgressToken(value: 'progress-token-abc123'),
+            entries: new Meta(
+                new Entry(
+                    key: new Key(value: 'clientVersion'),
+                    value: new Unknown(value: '1.0.0'),
+                ),
+                new Entry(
+                    key: new Key(value: 'requestId'),
+                    value: new Unknown(value: 'internal-req-789'),
+                ),
+                new Entry(
+                    key: new Key(value: 'timestamp'),
+                    value: new Unknown(value: '2025-07-04T10:30:00+00:00'),
+                ),
             )
         ),
     ),

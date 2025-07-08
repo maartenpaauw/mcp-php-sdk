@@ -8,6 +8,7 @@ use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\IncludeContext;
 use Maartenpaauw\Mcp\Message\Request\Parameter\MaxTokens;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\MetaWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Metadata;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ModelPreferences;
 use Maartenpaauw\Mcp\Message\Request\Parameter\SamplingMessages;
@@ -27,6 +28,7 @@ final readonly class CreateMessageRequest implements Request
         private ?MaxTokens $maxTokens = null,
         private ?StopSequences $stopSequences = null,
         private ?Metadata $metadata = null,
+        private ?MetaWithProgressToken $meta = null,
     ) {}
 
     #[JsonRpc\Parameter(alias: 'messages')]
@@ -75,5 +77,11 @@ final readonly class CreateMessageRequest implements Request
     public function metadata(): ?Metadata
     {
         return $this->metadata;
+    }
+
+    #[JsonRpc\Parameter(alias: '_meta')]
+    public function meta(): ?MetaWithProgressToken
+    {
+        return $this->meta;
     }
 }
