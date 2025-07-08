@@ -6,6 +6,7 @@ namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\JsonRpc;
+use Maartenpaauw\Mcp\Message\Request\HasMetadataWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\MetaWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
@@ -13,6 +14,8 @@ use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 #[JsonRpc\Method(Method::CallTool)]
 final readonly class CallToolRequest implements Request
 {
+    use HasMetadataWithProgressToken;
+
     /**
      * @param Name $name
      * @param array<string, mixed>|null $arguments
@@ -42,11 +45,5 @@ final readonly class CallToolRequest implements Request
     public function arguments(): ?array
     {
         return $this->arguments;
-    }
-
-    #[JsonRpc\Parameter(alias: '_meta')]
-    public function meta(): ?MetaWithProgressToken
-    {
-        return $this->meta;
     }
 }

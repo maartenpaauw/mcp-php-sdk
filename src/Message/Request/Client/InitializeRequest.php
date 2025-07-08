@@ -5,18 +5,23 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use Maartenpaauw\Mcp\JsonRpc;
+use Maartenpaauw\Mcp\Message\Request\HasMetadataWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ClientCapabilities;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Implementation;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\MetaWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ProtocolVersion;
 
 #[JsonRpc\Method(Method::Initialize)]
 final readonly class InitializeRequest implements Request
 {
+    use HasMetadataWithProgressToken;
+
     public function __construct(
         private ProtocolVersion $protocolVersion,
         private ClientCapabilities $clientCapabilities,
         private Implementation $clientInformation,
+        private ?MetaWithProgressToken $meta = null,
     ) {}
 
     #[JsonRpc\Parameter]

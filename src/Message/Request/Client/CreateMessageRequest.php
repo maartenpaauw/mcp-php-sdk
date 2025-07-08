@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Client;
 
 use Maartenpaauw\Mcp\JsonRpc;
+use Maartenpaauw\Mcp\Message\Request\HasMetadataWithProgressToken;
 use Maartenpaauw\Mcp\Message\Request\Method;
 use Maartenpaauw\Mcp\Message\Request\Parameter\IncludeContext;
 use Maartenpaauw\Mcp\Message\Request\Parameter\MaxTokens;
@@ -19,6 +20,8 @@ use Maartenpaauw\Mcp\Message\Request\Parameter\Temperature;
 #[JsonRpc\Method(method: Method::CreateMessage)]
 final readonly class CreateMessageRequest implements Request
 {
+    use HasMetadataWithProgressToken;
+
     public function __construct(
         private SamplingMessages $samplingMessages,
         private ?ModelPreferences $modelPreferences = null,
@@ -77,11 +80,5 @@ final readonly class CreateMessageRequest implements Request
     public function metadata(): ?Metadata
     {
         return $this->metadata;
-    }
-
-    #[JsonRpc\Parameter(alias: '_meta')]
-    public function meta(): ?MetaWithProgressToken
-    {
-        return $this->meta;
     }
 }
