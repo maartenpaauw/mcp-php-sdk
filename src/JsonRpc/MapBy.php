@@ -10,8 +10,8 @@ use Attribute;
 final readonly class MapBy
 {
     /**
-     * @param array{ 0: class-string, 1: non-empty-string } $key
-     * @param array{ 0: class-string, 1: non-empty-string } $value
+     * @param array<class-string, string | array{ 0: class-string, 1: non-empty-string }> $key
+     * @param array<class-string, string | array{ 0: class-string, 1: non-empty-string }> $value
      */
     public function __construct(
         public array $key,

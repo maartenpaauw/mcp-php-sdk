@@ -2,19 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Maartenpaauw\Mcp\Message\Request\Parameter\Metadata;
+namespace Maartenpaauw\Mcp\Message\Request\Parameter\Meta;
 
 use ArrayIterator;
 use Iterator;
-use Maartenpaauw\Mcp\JsonRpc\MapBy;
 use Override;
 
 /**
  * @implements Iterator<int, Entry>
  */
-#[MapBy(key: [Entry::class, 'key'], value: [Entry::class, 'value'])]
-final readonly class Metadata implements Iterator
+final readonly class Entries implements Iterator
 {
+    /**
+     * @var ArrayIterator<int, Entry>
+     */
     private ArrayIterator $entries;
 
     public function __construct(
@@ -36,7 +37,7 @@ final readonly class Metadata implements Iterator
     }
 
     #[Override]
-    public function key(): int | null
+    public function key(): int
     {
         return $this->entries->key();
     }

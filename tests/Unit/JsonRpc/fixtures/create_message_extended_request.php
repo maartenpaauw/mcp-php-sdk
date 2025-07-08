@@ -6,6 +6,7 @@ use Maartenpaauw\Mcp\JsonRpc\Request;
 use Maartenpaauw\Mcp\JsonRpc\RequestIdentifier;
 use Maartenpaauw\Mcp\JsonRpc\Version;
 use Maartenpaauw\Mcp\Message\Request\Client\CreateMessageRequest;
+use Maartenpaauw\Mcp\Message\Request\Parameter\AdditionalProperty;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Annotations;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Audience;
 use Maartenpaauw\Mcp\Message\Request\Parameter\AudioContent;
@@ -14,10 +15,7 @@ use Maartenpaauw\Mcp\Message\Request\Parameter\ImageContent;
 use Maartenpaauw\Mcp\Message\Request\Parameter\IncludeContext;
 use Maartenpaauw\Mcp\Message\Request\Parameter\LastModified;
 use Maartenpaauw\Mcp\Message\Request\Parameter\MaxTokens;
-use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta;
-use Maartenpaauw\Mcp\Message\Request\Parameter\Metadata\Entry;
-use Maartenpaauw\Mcp\Message\Request\Parameter\Metadata\Key;
-use Maartenpaauw\Mcp\Message\Request\Parameter\Metadata\Metadata;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Metadata;
 use Maartenpaauw\Mcp\Message\Request\Parameter\MimeType;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ModelHint;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ModelHints;
@@ -110,32 +108,32 @@ return new Request(
             new StopSequence(value: 'END_ANALYSIS'),
         ),
         metadata: new Metadata(
-            new Entry(
-                key: new Key(value: 'provider'),
+            new AdditionalProperty(
+                name: new Name(value: 'provider'),
                 value: new Unknown(value: 'anthropic'),
             ),
-            new Entry(
-                key: new Key(value: 'model_version'),
+            new AdditionalProperty(
+                name: new Name(value: 'model_version'),
                 value: new Unknown(value: 20241022),
             ),
-            new Entry(
-                key: new Key(value: 'request_source'),
+            new AdditionalProperty(
+                name: new Name(value: 'request_source'),
                 value: new Unknown(value: 'dashboard'),
             ),
-            new Entry(
-                key: new Key(value: 'user_id'),
+            new AdditionalProperty(
+                name: new Name(value: 'user_id'),
                 value: new Unknown(value: 'user-12345'),
             ),
-            new Entry(
-                key: new Key(value: 'session_id'),
+            new AdditionalProperty(
+                name: new Name(value: 'session_id'),
                 value: new Unknown(value: 'sess-67890'),
             ),
-            new Entry(
-                key: new Key(value: 'billing_tier'),
+            new AdditionalProperty(
+                name: new Name(value: 'billing_tier'),
                 value: new Unknown(value: 'premium'),
             ),
-            new Entry(
-                key: new Key(value: 'custom_parameters'),
+            new AdditionalProperty(
+                name: new Name(value: 'custom_parameters'),
                 value: new Unknown(value: [
                     'analysis_depth' => 'comprehensive',
                     'output_format' => 'structured',

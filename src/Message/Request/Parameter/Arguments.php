@@ -12,7 +12,7 @@ use Override;
 /**
  * @implements Iterator<int, Argument>
  */
-#[JsonRpc\MapBy(key: [Argument::class, 'name'], value: [Argument::class, 'value'])]
+#[JsonRpc\MapBy(key: [Argument::class => [Argument::class, 'name']], value: [Argument::class => [Argument::class, 'value']])]
 final readonly class Arguments implements Iterator
 {
     /**

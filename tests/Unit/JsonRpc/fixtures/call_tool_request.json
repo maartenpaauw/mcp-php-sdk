@@ -3,6 +3,11 @@
     "id": 1,
     "method": "tools/call",
     "params": {
-        "name": "get_weather"
+        "name": "get_weather",
+        "_meta": {
+            "progressToken": "abc123",
+            "customField": "customValue",
+            "anotherField": 123
+        }
     }
 }

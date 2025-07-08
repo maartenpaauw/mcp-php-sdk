@@ -7,7 +7,6 @@ namespace Maartenpaauw\Mcp\JsonRpc;
 use Iterator;
 use LogicException;
 use Maartenpaauw\Mcp\Message\Request;
-use Maartenpaauw\Mcp\Message\Request\Parameter\Arguments;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Parameter as RequestParameter;
 use ReflectionClass;
 use ReflectionException;
@@ -76,12 +75,10 @@ final readonly class RequestReflector
                         $array = [];
 
                         foreach ($value as $item) {
-                            if ($item instanceof $mapBy->key[0] === false || $item instanceof $mapBy->value[0] === false) {
-                                throw new LogicException();
-                            }
+                            $keyResolver = $mapBy->key[$item::class] ?? throw new LogicException();
 
-                            $key = call_user_func(callback: [$item, $mapBy->key[1]]);
-                            $value = call_user_func(callback: [$item, $mapBy->value[1]]);
+                            $key = is_string($keyResolver) ? $keyResolver : call_user_func(callback: [$item, $keyResolver[1]]);
+                            $value = call_user_func(callback: [$item, $mapBy->value[$item::class][1]]);
 
                             $array[(string) $key] = $value;
                         }
@@ -94,7 +91,6 @@ final readonly class RequestReflector
                         );
                     }
                 }
-
 
                 if ($value instanceof RequestParameter) {
                     $value = $this->parameters(subject: $value);

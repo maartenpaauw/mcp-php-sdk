@@ -7,6 +7,7 @@ namespace Maartenpaauw\Mcp\Message\Request\Client;
 use InvalidArgumentException;
 use Maartenpaauw\Mcp\JsonRpc;
 use Maartenpaauw\Mcp\Message\Request\Method;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\Meta;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Name;
 
 #[JsonRpc\Method(Method::CallTool)]
@@ -19,6 +20,7 @@ final readonly class CallToolRequest implements Request
     public function __construct(
         private Name $name,
         private ?array $arguments = null,
+        private ?Meta $meta = null,
     ) {
         foreach ($this->arguments ?? [] as $argumentName => $argument) {
             if (is_string(value: $argumentName) === false) {
@@ -40,5 +42,11 @@ final readonly class CallToolRequest implements Request
     public function arguments(): ?array
     {
         return $this->arguments;
+    }
+
+    #[JsonRpc\Parameter(alias: '_meta')]
+    public function meta(): ?Meta
+    {
+        return $this->meta;
     }
 }

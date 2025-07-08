@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 
 #[Small]
 #[CoversClassesThatImplementInterface(interfaceName: Message::class)]
-class RequestTestCase extends TestCase
+final class RequestTest extends TestCase
 {
     #[Test]
     #[DataProvider('fixtureDataProvider')]
