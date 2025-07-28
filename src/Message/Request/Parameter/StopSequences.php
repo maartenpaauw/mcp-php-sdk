@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use ArrayIterator;
-use Iterator;
+use IteratorAggregate;
 use Override;
+use Traversable;
 
 /**
- * @implements Iterator<int, StopSequence>
+ * @implements IteratorAggregate<int, StopSequence>
  */
-final readonly class StopSequences implements Iterator
+final readonly class StopSequences implements IteratorAggregate
 {
     /**
      * @var ArrayIterator<int, StopSequence>
@@ -25,32 +26,8 @@ final readonly class StopSequences implements Iterator
     }
 
     #[Override]
-    public function current(): StopSequence
+    public function getIterator(): Traversable
     {
-        return $this->stopSequences->current();
-    }
-
-    #[Override]
-    public function next(): void
-    {
-        $this->stopSequences->next();
-    }
-
-    #[Override]
-    public function key(): int | null
-    {
-        return $this->stopSequences->key();
-    }
-
-    #[Override]
-    public function valid(): bool
-    {
-        return $this->stopSequences->valid();
-    }
-
-    #[Override]
-    public function rewind(): void
-    {
-        $this->stopSequences->rewind();
+        return $this->stopSequences;
     }
 }

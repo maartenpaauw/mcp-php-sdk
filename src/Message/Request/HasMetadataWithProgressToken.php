@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\Message\Request;
 
-use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\MetaWithProgressToken;
 use Maartenpaauw\Mcp\JsonRpc;
+use Maartenpaauw\Mcp\Message\Request\Parameter\Meta\MetaWithProgressToken;
 
 trait HasMetadataWithProgressToken
 {

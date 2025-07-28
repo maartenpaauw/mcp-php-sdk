@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use ArrayIterator;
-use Iterator;
+use IteratorAggregate;
 use Maartenpaauw\Mcp\JsonRpc\MapBy;
 use Override;
+use Traversable;
 
 /**
- * @implements Iterator<int, AdditionalProperty>
+ * @implements IteratorAggregate<int, AdditionalProperty>
  */
 #[MapBy(
     key: [AdditionalProperty::class => [AdditionalProperty::class, 'name']],
     value: [AdditionalProperty::class => [AdditionalProperty::class, 'value']],
 )]
-final readonly class Metadata implements Iterator
+final readonly class Metadata implements IteratorAggregate
 {
     private ArrayIterator $additionalProperties;
 
@@ -27,32 +28,8 @@ final readonly class Metadata implements Iterator
     }
 
     #[Override]
-    public function current(): AdditionalProperty
+    public function getIterator(): Traversable
     {
-        return $this->additionalProperties->current();
-    }
-
-    #[Override]
-    public function next(): void
-    {
-        $this->additionalProperties->next();
-    }
-
-    #[Override]
-    public function key(): int
-    {
-        return $this->additionalProperties->key();
-    }
-
-    #[Override]
-    public function valid(): bool
-    {
-        return $this->additionalProperties->valid();
-    }
-
-    #[Override]
-    public function rewind(): void
-    {
-        $this->additionalProperties->rewind();
+        return $this->additionalProperties;
     }
 }

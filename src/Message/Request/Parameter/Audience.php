@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use ArrayIterator;
-use Iterator;
+use IteratorAggregate;
 use Override;
+use Traversable;
 
 /**
- * @implements Iterator<int, Role>
+ * @implements IteratorAggregate<int, Role>
  */
-final readonly class Audience implements Iterator
+final readonly class Audience implements IteratorAggregate
 {
     /**
      * @var ArrayIterator<int, Role>
@@ -24,32 +25,8 @@ final readonly class Audience implements Iterator
     }
 
     #[Override]
-    public function current(): Role
+    public function getIterator(): Traversable
     {
-        return $this->roles->current();
-    }
-
-    #[Override]
-    public function next(): void
-    {
-        $this->roles->next();
-    }
-
-    #[Override]
-    public function key(): int | null
-    {
-        return $this->roles->key();
-    }
-
-    #[Override]
-    public function valid(): bool
-    {
-        return $this->roles->valid();
-    }
-
-    #[Override]
-    public function rewind(): void
-    {
-        $this->roles->rewind();
+        return $this->roles;
     }
 }

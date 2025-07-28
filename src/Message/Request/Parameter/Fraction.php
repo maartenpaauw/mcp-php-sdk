@@ -12,7 +12,7 @@ abstract readonly class Fraction implements JsonSerializable
 {
     public function __construct(
         private int | float $value,
-    ){
+    ) {
         if ($this->value < 0 || $this->value > 1) {
             throw new InvalidArgumentException(message: 'Value must be between 0 and 1');
         }

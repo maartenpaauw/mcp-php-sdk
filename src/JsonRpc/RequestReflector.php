@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Maartenpaauw\Mcp\JsonRpc;
 
-use Iterator;
+use IteratorAggregate;
 use LogicException;
 use Maartenpaauw\Mcp\Message\Request;
 use Maartenpaauw\Mcp\Message\Request\Parameter\Parameter as RequestParameter;
@@ -61,7 +61,7 @@ final readonly class RequestReflector
 
                 $value = $reflectionMethod->invoke(object: $subject);
 
-                if ($value instanceof Iterator) {
+                if ($value instanceof IteratorAggregate) {
                     $iteratorReflectionClass = new ReflectionClass(objectOrClass: $value);
                     $mapByAttribute = $iteratorReflectionClass->getAttributes(name: MapBy::class)[0] ?? null;
 

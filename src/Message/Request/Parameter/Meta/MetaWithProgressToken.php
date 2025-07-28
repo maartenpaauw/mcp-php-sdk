@@ -6,14 +6,15 @@ namespace Maartenpaauw\Mcp\Message\Request\Parameter\Meta;
 
 use AppendIterator;
 use ArrayIterator;
-use Iterator;
+use Exception;
+use IteratorAggregate;
 use Maartenpaauw\Mcp\JsonRpc\MapBy;
-use Maartenpaauw\Mcp\Message\Request\Parameter\Parameter;
 use Maartenpaauw\Mcp\Message\Request\Parameter\ProgressToken;
 use Override;
+use Traversable;
 
 /**
- * @implements Iterator<int, Entry>
+ * @implements IteratorAggregate<int, Entry>
  */
 #[MapBy(
     key: [
@@ -25,15 +26,18 @@ use Override;
         Entry::class => [Entry::class, 'value'],
     ],
 )]
-final readonly class MetaWithProgressToken implements Iterator
+final readonly class MetaWithProgressToken implements IteratorAggregate
 {
     private ?ProgressToken $progressToken;
 
     /**
-     * @var Iterator<int, ProgressToken | Entry>
+     * @var AppendIterator<int, ProgressToken | Entry>
      */
-    private Iterator $iterator;
+    private AppendIterator $iterator;
 
+    /**
+     * @throws Exception
+     */
     public function __construct(
         null | ProgressToken $progressToken = null,
         private ?Meta $entries = null,
@@ -49,7 +53,7 @@ final readonly class MetaWithProgressToken implements Iterator
         }
 
         if ($entries !== null) {
-            $all->append(iterator: $entries);
+            $all->append(iterator: new ArrayIterator(array: $entries->getIterator()));
         }
 
         $this->iterator = $all;
@@ -66,32 +70,8 @@ final readonly class MetaWithProgressToken implements Iterator
     }
 
     #[Override]
-    public function current(): ProgressToken | Entry
+    public function getIterator(): Traversable
     {
-        return $this->iterator->current();
-    }
-
-    #[Override]
-    public function next(): void
-    {
-        $this->iterator->next();
-    }
-
-    #[Override]
-    public function key(): int
-    {
-        return $this->iterator->key();
-    }
-
-    #[Override]
-    public function valid(): bool
-    {
-        return $this->iterator->valid();
-    }
-
-    #[Override]
-    public function rewind(): void
-    {
-        $this->iterator->rewind();
+        return $this->iterator;
     }
 }

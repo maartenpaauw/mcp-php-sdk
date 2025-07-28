@@ -5,18 +5,19 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter\Meta;
 
 use ArrayIterator;
-use Iterator;
-use Override;
+use IteratorAggregate;
 use Maartenpaauw\Mcp\JsonRpc;
+use Override;
+use Traversable;
 
 /**
- * @implements Iterator<int, Entry>
+ * @implements IteratorAggregate<int, Entry>
  */
 #[JsonRpc\MapBy(
     key: [Entry::class => [Entry::class, 'key']],
     value: [Entry::class => [Entry::class, 'value']],
 )]
-final readonly class Meta implements Iterator
+final readonly class Meta implements IteratorAggregate
 {
     /**
      * @var ArrayIterator<int, Entry>
@@ -30,32 +31,8 @@ final readonly class Meta implements Iterator
     }
 
     #[Override]
-    public function current(): Entry
+    public function getIterator(): Traversable
     {
-        return $this->entries->current();
-    }
-
-    #[Override]
-    public function next(): void
-    {
-        $this->entries->next();
-    }
-
-    #[Override]
-    public function key(): int
-    {
-        return $this->entries->key();
-    }
-
-    #[Override]
-    public function valid(): bool
-    {
-        return $this->entries->valid();
-    }
-
-    #[Override]
-    public function rewind(): void
-    {
-        $this->entries->rewind();
+        return $this->entries;
     }
 }

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use ArrayIterator;
-use Iterator;
+use IteratorAggregate;
 use Override;
+use Traversable;
 
 /**
- * @implements Iterator<int, ModelHint>
+ * @implements IteratorAggregate<int, ModelHint>
  */
-final readonly class ModelHints implements Iterator
+final readonly class ModelHints implements IteratorAggregate
 {
     /**
      * @var ArrayIterator<int, ModelHint>
@@ -25,32 +26,8 @@ final readonly class ModelHints implements Iterator
     }
 
     #[Override]
-    public function current(): ModelHint
+    public function getIterator(): Traversable
     {
-        return $this->modelHints->current();
-    }
-
-    #[Override]
-    public function next(): void
-    {
-        $this->modelHints->next();
-    }
-
-    #[Override]
-    public function key(): int | null
-    {
-        return $this->modelHints->key();
-    }
-
-    #[Override]
-    public function valid(): bool
-    {
-        return $this->modelHints->valid();
-    }
-
-    #[Override]
-    public function rewind(): void
-    {
-        $this->modelHints->rewind();
+        return $this->modelHints;
     }
 }

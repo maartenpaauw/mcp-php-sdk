@@ -5,15 +5,16 @@ declare(strict_types=1);
 namespace Maartenpaauw\Mcp\Message\Request\Parameter;
 
 use ArrayIterator;
-use Iterator;
+use IteratorAggregate;
 use Maartenpaauw\Mcp\JsonRpc;
 use Override;
+use Traversable;
 
 /**
- * @implements Iterator<int, Argument>
+ * @implements IteratorAggregate<int, Argument>
  */
 #[JsonRpc\MapBy(key: [Argument::class => [Argument::class, 'name']], value: [Argument::class => [Argument::class, 'value']])]
-final readonly class Arguments implements Iterator
+final readonly class Arguments implements IteratorAggregate
 {
     /**
      * @var ArrayIterator<int, Argument>
@@ -28,32 +29,8 @@ final readonly class Arguments implements Iterator
     }
 
     #[Override]
-    public function current(): Argument
+    public function getIterator(): Traversable
     {
-        return $this->arguments->current();
-    }
-
-    #[Override]
-    public function next(): void
-    {
-        $this->arguments->next();
-    }
-
-    #[Override]
-    public function key(): int | null
-    {
-        return $this->arguments->key();
-    }
-
-    #[Override]
-    public function valid(): bool
-    {
-        return $this->arguments->valid();
-    }
-
-    #[Override]
-    public function rewind(): void
-    {
-        $this->arguments->rewind();
+        return $this->arguments;
     }
 }
